@@ -8,6 +8,9 @@ https://github.com/dduan/dotfiles/
 
 
 Linking the resources and making it possible
+# alacritty
+ln -s ~/env_setup/dotfiles/config/alacritty ~/.config/alacritty
+
 # tmux
 ln -s ~/env_setup/dotfiles/.tmux ~/.tmux
 ln -s ~/env_setup/dotfiles/.tmux.conf ~/.tmux.conf

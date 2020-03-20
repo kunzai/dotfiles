@@ -1,0 +1,1 @@
+/home/kunzai/.fzf/shell/key-bindings.fish

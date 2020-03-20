@@ -15,8 +15,19 @@ ln -s ~/env_setup/dotfiles/config/alacritty ~/.config/alacritty
 ln -s ~/env_setup/dotfiles/.tmux ~/.tmux
 ln -s ~/env_setup/dotfiles/.tmux.conf ~/.tmux.conf
 
+# fish
+ln -s /home/kunzai/dotfiles/config/fish/config.fish /home/kunzai/.config/fish,a
+
+# powerline-shell
+ln -s /home/kunzai/dotfiles/config/powerline-shell /home/kunzai/.config/powerline-shell
+# powerline-shell
+ln -s /home/kunzai/dotfiles/config/powerline-shell /home/kunzai/.config/powerline-shell
+
 # nvim
 ln -s ~/env_setup/dotfiles/config/nvim ~/.config/nvim
+
+# powerline-shell
+ln -s /home/kunzai/dotfiles/config/powerline-shell /home/kunzai/.config/powerline-shell
 
 ###
 

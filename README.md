@@ -24,6 +24,12 @@ ln -s /home/kunzai/dotfiles/config/powerline-shell /home/kunzai/.config/powerlin
 ln -s /home/kunzai/dotfiles/config/powerline-shell /home/kunzai/.config/powerline-shell
 
 # nvim
+# 1) Download appimage from neovim site, min v0.5 to work with lsp
+# 2) make it executeable
+chmod u+x /home/kunzai/Appimages/nvim.appImage
+# 3) symlink it to normal path
+sudo ln -s /home/kunzai/Appimages/nvim.appImage /usr/local/nvim
+# 4) create symlink for configuration file
 ln -s ~/env_setup/dotfiles/config/nvim ~/.config/nvim
 
 # powerline-shell

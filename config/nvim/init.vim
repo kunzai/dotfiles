@@ -8,7 +8,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'arcticicestudio/nord-vim'
 " Nice status bar
-Plug 'bling/vim-airline'
+Plug 'bling/vim-airline' " Replace by powerline-status
 " Auto close parens, braces, brackets, etc
 Plug 'jiangmiao/auto-pairs'
 " Show git stuff in gutter
@@ -33,12 +33,11 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Better than grepping Plug 'mileszs/ack.vim' alignment made easy in Visual mode!  Plug 'junegunn/vim-easy-align'
 
 " Language Protocol Server and autocompelete
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
-
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" Plug 'prabirshrestha/async.vim'
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'mattn/vim-lsp-settings'
+" Plug 'prabirshrestha/asyncomplete.vim'
+" Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'neovim/nvim-lsp'
 "Plug 'ncm2/ncm2'
 "Plug 'roxma/nvim-yarp'
@@ -66,7 +65,7 @@ Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 " languages
 " Plug 'ryanolsonx/vim-lsp-javascript'
 "lug 'ryanolsonx/vim-lsp-typescript'
-"lug 'dart-lang/dart-vim-plugin'
+Plug 'dart-lang/dart-vim-plugin'
 "lug 'natebosch/vim-lsc'
 "lug 'natebosch/vim-lsc-dart'
 "lug 'ryanolsonx/vim-lsp-javascript'
@@ -79,11 +78,8 @@ filetype plugin on
 syntax on
 set encoding=utf-8
 set number relativenumber
-" Enable autocompletion:
-set wildmode=longest,list,full
-" Disables automatic commenting on newline:
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-" Goyo plugin makes text more readable when writing prose: map <leader>g :Goyo \| set bg=light \| set linebreak<CR>
+:set ignorecase " if case sensitive is desired replace with noignorecase
+
 
 " Configurations
 " fix for nerdtree-git-plugin with fish shell
@@ -92,7 +88,7 @@ set shell=sh
 colorscheme nord
 
 " Line Numbers
-set number
+" set number
 
 " Highlight the line the cursor is on.
 " set cursorline
@@ -118,6 +114,8 @@ set autoindent
 set undofile
 set undodir=/tmp
 
+" clipboard sharing ???
+set clipboard+=unnamedplus
 
 " Use arrow keys to switch tabs
 nnoremap <Left> :tabprevious<CR>
@@ -133,8 +131,14 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " Toggle NerdTree
 nnoremap <leader>a :NERDTreeToggle<cr>
 " Close vim if the last window open is NerdTree
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+
+" Enable autocompletion:
+set wildmode=longest,list,full
+" Disables automatic commenting on newline:
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+" Goyo plugin makes text more readable when writing prose: map <leader>g :Goyo \| set bg=light \| set linebreak<CR>
 " Git status
 " TODO: Check if we have to remap because of vimwiki
 nnoremap <leader>w :Gstatus<cr>
@@ -188,9 +192,9 @@ nmap ga <Plug>(EasyAlign)
 " autocmd BufEnter * call ncm2#enable_for_buffer()
 
 " IMPORTANT: :help Ncm2PopupOpen for more information
-set completeopt=noinsert,menuone,noselect
-nnoremap <leader>e :LspHover<cr>
-nnoremap <leader>d :LspDefinition<cr>
+"set completeopt=noinsert,menuone,noselect
+"nnoremap <leader>e :LspHover<cr>
+"nnoremap <leader>d :LspDefinition<cr>
 
 " Dart specific configurations
 " https://github.com/dart-lang/dart-vim-plugin/blob/master/README.md#how-do-i-configure-an-lsp-plugin-to-start-the-analysis-server
@@ -203,13 +207,13 @@ let g:dart_style_guide = 2
 let g:dart_format_on_save = 1
 
 " Use all the defaults (recommended):
-let g:lsc_auto_map = v:true
+" let g:lsc_auto_map = v:true
 
 " Apply the defaults with a few overrides:
-let g:lsc_auto_map = {'defaults': v:true, 'FindReferences': '<leader>r'}
+" let g:lsc_auto_map = {'defaults': v:true, 'FindReferences': '<leader>r'}
 
 " Setting a value to a blank string leaves that command unmapped:
-let g:lsc_auto_map = {'defaults': v:true, 'FindImplementations': ''}
+" let g:lsc_auto_map = {'defaults': v:true, 'FindImplementations': ''}
 
 " ... or set only the commands you want mapped without defaults.
 " Complete default mappings are:
@@ -236,6 +240,26 @@ let g:lsc_auto_map = {'defaults': v:true, 'FindImplementations': ''}
 " Required for operations modifying multiple buffers like rename.
 set hidden
 
+" Example config
+" autocmd Filetype javascript, typescript, setl omnifunc=v:lua.vim.lsp.omnifunc
+" nnoremap <silent> ;dc <cmd>lua vim.lsp.buf.declaration()<CR>
+" nnoremap <silent> ;df <cmd>lua vim.lsp.buf.definition()<CR>
+" nnoremap <silent> ;h  <cmd>lua vim.lsp.buf.hover()<CR>
+" nnoremap <silent> ;i  <cmd>lua vim.lsp.buf.implementation()<CR>
+" nnoremap <silent> ;s  <cmd>lua vim.lsp.buf.signature_help()<CR>
+" nnoremap <silent> ;td <cmd>lua vim.lsp.buf.type_definition()<CR>
+
+
+
+:lua << EOF
+require'nvim_lsp'.tsserver.setup{}
+require'nvim_lsp'.html.setup{}
+require'nvim_lsp'.dartls.setup{}
+EOF
+
+
+" Use LSP omni-completion in Python files.
+autocmd Filetype html, typescript, dart setlocal omnifunc=v:lua.vim.lsp.omnifunc
 " Client config!
 "let g:LanguageClient_serverCommands = {
 "    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],

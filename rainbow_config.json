@@ -3,7 +3,7 @@
     "HEARTBEAT_TIMEOUT": 120, 
     "IMAGE_ON_TERM": true, 
     "IMAGE_RESIZE_TO_FIT": true, 
-    "THEME": "solarized", 
+    "THEME": "base16", 
     "ASCII_ART": true, 
     "HIDE_PROMPT": true, 
     "PREFIX": "#owner#place#me#keyword", 

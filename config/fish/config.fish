@@ -30,7 +30,7 @@ setxkbmap -option caps:escape
 
 
 # neofetch
-neofetch
+# neofetch
 
 # powerline-shell
 function fish_prompt

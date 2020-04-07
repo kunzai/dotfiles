@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/home/kunzai'
+let g:netrw_dirhist_0='/home/kunzai/dotfiles'
+let g:netrw_dirhist_9='/home/kunzai'
+let g:netrw_dirhist_8='/home/kunzai/dotfiles/config/nvim'
+let g:netrw_dirhist_7='/'
+let g:netrw_dirhist_6='/home'
+let g:netrw_dirhist_5='/home/kunzai'
+let g:netrw_dirhist_4='/home/kunzai/dotfiles'
+let g:netrw_dirhist_3='/home/kunzai/dotfiles/config'
+let g:netrw_dirhist_2='/home/kunzai/dotfiles/config/nvim'

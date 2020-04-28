@@ -2,18 +2,18 @@ let mapleader = " "
 
 " Specify a directory for plugins
 call plug#begin('~/.local/share/nvim/plugged')
-
-" Use NerdTree for file browsing
-" Plug 'scrooloose/nerdtree'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
+" colorscheme to use
 Plug 'arcticicestudio/nord-vim'
 " Nice status bar
 Plug 'itchyny/lightline.vim'
 
+" enhance netrw
+Plug 'tpope/vim-vinegar'
+
 " Auto close parens, braces, brackets, etc
 Plug 'jiangmiao/auto-pairs'
-" Show git stuff in gutter
-Plug 'airblade/vim-gitgutter'
+" Show vcs stuff 
+Plug 'mhinz/vim-signify'
 " Git tool
 Plug 'tpope/vim-fugitive'
 " nerdcommenter
@@ -44,13 +44,13 @@ Plug 'vimwiki/vimwiki'
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 Plug 'mattn/calendar-vim' 
 
-Plug 'vifm/vifm.vim'
-" languages
+" zoom in and out
+Plug 'szw/vim-maximizer'
+"" languages
 Plug 'dart-lang/dart-vim-plugin'
 call plug#end()
 
 " Some basics:
-set nocompatible
 filetype plugin on
 syntax on
 set encoding=utf-8
@@ -68,28 +68,26 @@ set ignorecase
 set smartcase
 set noswapfile
 
-  " vifm key mappings
-" map <Leader>vv :Vifm<CR>
-" map <Leader>vs :VsplitVifm<CR>
-" map <Leader>sp :SplitVifm<CR>
-" map <Leader>dv :DiffVifm<CR>
-" map <Leader>tv :TabVifm<CR>
 
 " netrw
-let g:netrw_banner = 0
-" let g:netrw_liststyle = 3
-" let g:netrw_browse_split = 4
-" let g:netrw_altv = 1
-" let g:netrw_fastbrowse = 0
-" let g:netrw_winsize = 25
-" augroup ProjectDrawer
-"   autocmd!
-"   autocmd VimEnter * :Vexplore
-" augroup END
+let g:netrw_banner = 0 " remove banner on top
+let g:netrw_liststyle = 3 " show tree listing
+" let g:netrw_browse_split = 2
+" let g:netrw_altv = 1 " open splits to the right
+let g:netrw_fastbrowse = 0
+let g:netrw_winsize = 25
+let g:netrw_preview = 1 " open preview splits to the right
 
+" Per default, netrw leaves unmodified buffers open. This autocmd
+" deletes netrw's buffer once it is hidden
+autocmd FileType netrw setl bufhidden=delete " or use :qa!
+" These next three lines are for the fuzzy search
+set nocompatible
+set path+=**
+set wildmenu
 
 " Disables automatic commenting on newline:
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+" autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " lightline configurarion 
 let g:lightline = {
@@ -122,9 +120,6 @@ set smarttab
 " Automatic indentation is good
 set autoindent
 
-" deactivate Q
-nnoremap Q <Nop>
-
 " Undo function after reopening
 set undofile
 set undodir=/tmp
@@ -137,17 +132,13 @@ set clipboard+=unnamedplus
 nnoremap <Left> :tabprevious<CR>
 nnoremap <Right> :tabnext<CR>
 
-" Nerdtree, if no file is give, open nvim with Nerdtree open
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" Nerdtree, if folder is given open Nerdtree and make folder root
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-" 
-" Toggle NerdTree
-" nnoremap <leader>n :NERDTreeToggle<cr>
-" Close vim if the last window open is NerdTree
-" autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+
+" Keymaps for MaximizerToggle
+nnoremap <silent><F3> :MaximizerToggle<CR>
+vnoremap <silent><F3> :MaximizerToggle<CR>gv
+inoremap <silent><F3> <C-o>:MaximizerToggle<CR>
+
 
 " Git status
 " TODO: Check if we have to remap because of vimwiki
@@ -160,12 +151,8 @@ let g:vimwiki_list = [{'path': '~/vimwiki/',
 let g:instant_markdown_autostart = 0 " no autostart
 map <leader>md :InstantMarkdownPreview<CR>
 
-" add swapfile to see if nerdtree error is fixed
 " set swapfile
 set dir=~/.swap-files
-
-" custum mapping for Goyo
-" nmap <leader>g :Goyo<CR>
 
 " Nerdcommenter: Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
@@ -205,7 +192,24 @@ command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 " require'nvim_lsp'.dartls.setup{}
 " EOF
 
+" mhinz-signify settings
+" default updatetime 4000ms is not good for async update
+set updatetime=100
 
+" fzf settings
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" Advanced customization using Vim function
+inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 " " Use LSP omni-completion in Python files.
 " autocmd Filetype html, typescript, dart setlocal omnifunc=v:lua.vim.lsp.omnifunc
 " TextEdit might fail if hidden is not set.

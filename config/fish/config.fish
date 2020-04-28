@@ -3,7 +3,7 @@ set -g theme_powerline_fonts no
 set -g theme_nerd_fonts yes
 
 # add flutter to the path
-set -gx PATH ~/development/flutter/bin $PATH
+set -gx PATH /opt/flutter/bin $PATH
 # add dart to the path
 set -gx PATH ~/development/flutter/bin/cache/dart-sdk/bin $PATH
 set -gx PATH ~/.pub-cache/bin $PATH

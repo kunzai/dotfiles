@@ -9,6 +9,7 @@ set -gx PATH ~/development/flutter/bin/cache/dart-sdk/bin $PATH
 set -gx PATH ~/.pub-cache/bin $PATH
 
 set -gx EDITOR /usr/local/bin/nvim
+# set -gx TERM "screen-256color"
 
 set -gx CHROME_EXECUTABLE /opt/google/chrome/chrome
 alias google-chrome "google-chrome-stable"
@@ -26,7 +27,7 @@ end
 fish_vi_key_bindings
 
 # set capslock to esc 
-setxkbmap -option caps:escape
+setxkbmap -option caps:ctrl_modifier
 
 
 # neofetch

@@ -8,10 +8,12 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'itchyny/lightline.vim'
 
 " enhance netrw
-Plug 'tpope/vim-vinegar'
-
+" Plug 'tpope/vim-vinegar'
+" manipulate ' " [ { easier
+Plug 'tpope/vim-surround'
 " Auto close parens, braces, brackets, etc
-Plug 'jiangmiao/auto-pairs'
+Plug 'Raimondi/delimitMate'
+" Plug 'jiangmiao/auto-pairs'
 " Show vcs stuff 
 Plug 'mhinz/vim-signify'
 " Git tool
@@ -21,8 +23,6 @@ Plug 'preservim/nerdcommenter'
 " Seamless switching between tmux and vim
 Plug 'christoomey/vim-tmux-navigator'
 " focus content
-" Plug 'junegunn/goyo.vim'
-
 " CSS colorizer
 Plug 'lilydjwg/colorizer'
 " Plug 'chrisbra/Colorizer'
@@ -37,17 +37,18 @@ Plug 'junegunn/fzf.vim'
 " Better than grepping Plug 'mileszs/ack.vim' alignment made easy in Visual mode!  Plug 'junegunn/vim-easy-align'
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install()}}
 
-" Plug 'neovim/nvim-lsp'
-
+" Plug 'junegunn/goyo.vim'
+Plug 'jremmen/vim-ripgrep'
 " Notes / Wiki
 Plug 'vimwiki/vimwiki'
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
-Plug 'mattn/calendar-vim' 
+Plug 'mattn/calendar-vim'
 
 " zoom in and out
 Plug 'szw/vim-maximizer'
-"" languages
+" languages
 Plug 'dart-lang/dart-vim-plugin'
+Plug 'thosakwe/vim-flutter'
 call plug#end()
 
 " Some basics:
@@ -67,8 +68,8 @@ set incsearch
 set ignorecase
 set smartcase
 set noswapfile
-
-
+" get rid of second mode display, lightline handles this
+set noshowmode
 " netrw
 let g:netrw_banner = 0 " remove banner on top
 let g:netrw_liststyle = 3 " show tree listing
@@ -89,19 +90,30 @@ set wildmenu
 " Disables automatic commenting on newline:
 " autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-" lightline configurarion 
+" lightline configurarion
 let g:lightline = {
       \ 'colorscheme': 'nord',
-      \ }
+ \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'relativepath', 'modified', 'paste', 'bufnum' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ }, 
+  \ }
 set laststatus=2
 
-" Nerdtree configurarion
-" fix for nerdtree-git-plugin with fish shell
-" set shell=sh
+" use this colorscheme
 colorscheme nord
 
 " Highlight the line the cursor is on.
 " set cursorline
+
+" folding options
+set foldmethod=syntax   
+set foldnestmax=10
+set nofoldenable
+" set foldlevel=2
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -133,6 +145,12 @@ nnoremap <Left> :tabprevious<CR>
 nnoremap <Right> :tabnext<CR>
 
 
+" Enable true color
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 
 " Keymaps for MaximizerToggle
 nnoremap <silent><F3> :MaximizerToggle<CR>
@@ -140,9 +158,14 @@ vnoremap <silent><F3> :MaximizerToggle<CR>gv
 inoremap <silent><F3> <C-o>:MaximizerToggle<CR>
 
 
-" Git status
-" TODO: Check if we have to remap because of vimwiki
-nnoremap <leader>w :Gstatus<cr>
+" Git fugitive and coc, go hand in hand
+nnoremap <leader>gs :G<CR>
+nnoremap <leader>gt :diffget //3<CR> " left side
+nnoremap <leader>gn :diffget //2<CR> " right side
+nnoremap <leader>gg :GFiles<CR>
+nnoremap <leader>gf :Files<CR>
+nnoremap <leader>gl :Lines<CR>
+nnoremap <leader>gb :Buffers<CR>
 
 " vimwiki configurarion
 let g:vimwiki_list = [{'path': '~/vimwiki/',
@@ -182,6 +205,13 @@ let g:dart_style_guide = 2
 " format on save
 let g:dart_format_on_save = 1
 
+" vim-flutter conf
+nnoremap <leader>fr :FlutterRun<cr>
+nnoremap <leader>fq :FlutterQuit<cr>
+nnoremap <leader>fr :FlutterHotReload<cr>
+nnoremap <leader>fR :FlutterHotRestart<cr>
+nnoremap <leader>fD :FlutterVisualDebug<cr>
+
 " prettier start
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
@@ -212,6 +242,10 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 " " Use LSP omni-completion in Python files.
 " autocmd Filetype html, typescript, dart setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
+
+
+
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -252,11 +286,11 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
-if has('patch8.1.1068')
-  " Use `complete_info` if your (Neo)Vim version supports it.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
   inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 else
-  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -308,18 +342,21 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
-" Introduce function text object
+" Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
 xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
 omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
 
-" Use <TAB> for selections ranges.
-" NOTE: Requires 'textDocument/selectionRange' support from the language server.
-" coc-tsserver, coc-python are the examples of servers that support it.
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of LS, ex: coc-tsserver
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -352,4 +389,3 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-

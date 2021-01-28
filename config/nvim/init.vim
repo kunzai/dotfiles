@@ -1,5 +1,10 @@
 let mapleader = " "
 
+" disable python2
+let g:loaded_python_provider = 0
+
+let g:python3_host_prog  = '/usr/bin/python3'
+
 " Specify a directory for plugins
 call plug#begin('~/.local/share/nvim/plugged')
 " colorscheme to use
@@ -110,10 +115,16 @@ colorscheme nord
 " set cursorline
 
 " folding options
-set foldmethod=syntax   
+set foldmethod=syntax
 set foldnestmax=10
 set nofoldenable
 " set foldlevel=2
+
+" map vertical resize
+nnoremap <silent> <Leader>= :resize +10 <CR>
+nnoremap <silent> <Leader>' :resize -10 <CR>
+nnoremap <silent> <Leader>[ :vertical resize -10 <CR>
+nnoremap <silent> <Leader>] :vertical resize +10 <CR>
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -168,8 +179,12 @@ nnoremap <leader>gl :Lines<CR>
 nnoremap <leader>gb :Buffers<CR>
 
 " vimwiki configurarion
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [
+        \ {'path': '~/vimwiki/work', 'syntax': 'markdown', 'ext': '.md'},
+        \ {'path': '~/vimwiki/private', 'syntax': 'markdown', 'ext': '.md'},
+        \ {'path': '~/vimwiki/nolessthanepic', 'syntax': 'markdown', 'ext': '.md'},
+        \{'path': '~/vimwiki/','auto_tags':1}]
+
 " vim instant markdon 
 let g:instant_markdown_autostart = 0 " no autostart
 map <leader>md :InstantMarkdownPreview<CR>
@@ -215,7 +230,7 @@ nnoremap <leader>fD :FlutterVisualDebug<cr>
 " prettier start
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
-" configuation neede for vim-lsp
+" configuration needed for vim-lsp
 " :lua << EOF
 " require'nvim_lsp'.tsserver.setup{}
 " require'nvim_lsp'.html.setup{}
@@ -303,6 +318,10 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+" Apply CodeAction to selected region
+" Example: <leader>aap for current paragraph, <leader>aw for the current word.
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
@@ -389,3 +408,6 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+
+set mouse=

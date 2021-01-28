@@ -297,6 +297,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
+exec --no-startup-id nextcloud
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 exec --no-startup-id start_conky_maia
@@ -306,7 +307,7 @@ exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
 exec --no-startup-id /home/kunzai/.screenlayout/gaming.sh
-exec --no-startup-id wine /home/kunzai/.wine/drive_c/Program\ Files\ \(x86\)/TradeSkillMaster\ Application/app/TSMApplication.exe
+# exec --no-startup-id wine /home/kunzai/.wine/drive_c/Program\ Files\ \(x86\)/TradeSkillMaster\ Application/app/TSMApplication.exe
 exec --no-startup-id lutris
 
 # Color palette used for the terminal ( ~/.Xresources file )
@@ -343,27 +344,28 @@ set_from_resource $term_color15    color15
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
 	i3bar_command i3bar
-	status_command i3status
+	status_command i3status --config ~/.config/i3status/i3status.conf
 	position bottom
+  # separator_symbol ":|:"
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-#	tray_output primary
+  # tray_output primary
 #	tray_output eDP1
 
 	bindsym button4 nop
 	bindsym button5 nop
-#   font xft:URWGothic-Book 11
+  font xft:URWGothic-Book 11
 	strip_workspace_numbers yes
 
     colors {
-        background #222D31
-        statusline #F9FAF9
-        separator  #454947
+        background #2E3440
+        statusline #D8DEE9
+        separator  #4C566A
 
 #                      border  backgr. text
-        focused_workspace  #F9FAF9 #16a085 #292F34
-        active_workspace   #595B5B #353836 #FDF6E3
-        inactive_workspace #595B5B #222D31 #EEE8D5
+        focused_workspace  #ECEFF4 #4C566A #ECEFF4
+        active_workspace   #4C566A #2E3440 #D8DEE9
+        inactive_workspace #2E3440 #2E3440 #D8DEE9
         binding_mode       #16a085 #2C2C2C #F9FAF9
         urgent_workspace   #16a085 #FDF6E3 #E5201D
     }
@@ -374,7 +376,8 @@ bindsym $mod+m bar mode toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
-  client.focused          #556064 #556064 #80FFF9 #FDF6E3
+  client.focused          #ECEFF4 #ECEFF4 #80FFF9 #FDF6E3
+  # client.focused          #556064 #556064 #80FFF9 #FDF6E3
   client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
   client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
   client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2

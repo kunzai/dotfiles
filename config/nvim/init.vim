@@ -1,8 +1,8 @@
 let mapleader = " "
 
 " disable python2
-let g:loaded_python_provider = 0
-
+" let g:loaded_python_provider = 0
+let g:python_host_prog  = '/usr/bin/python2'
 let g:python3_host_prog  = '/usr/bin/python3'
 
 " Specify a directory for plugins
@@ -12,14 +12,12 @@ Plug 'arcticicestudio/nord-vim'
 " Nice status bar
 Plug 'itchyny/lightline.vim'
 
-" enhance netrw
-" Plug 'tpope/vim-vinegar'
 " manipulate ' " [ { easier
 Plug 'tpope/vim-surround'
 " Auto close parens, braces, brackets, etc
 Plug 'Raimondi/delimitMate'
 " Plug 'jiangmiao/auto-pairs'
-" Show vcs stuff 
+" Show vcs stuff
 Plug 'mhinz/vim-signify'
 " Git tool
 Plug 'tpope/vim-fugitive'
@@ -30,7 +28,6 @@ Plug 'christoomey/vim-tmux-navigator'
 " focus content
 " CSS colorizer
 Plug 'lilydjwg/colorizer'
-" Plug 'chrisbra/Colorizer'
 " Highlight trailing whitespaces
 Plug 'ntpeters/vim-better-whitespace'
 " Indicator for what was yanked
@@ -53,7 +50,10 @@ Plug 'mattn/calendar-vim'
 Plug 'szw/vim-maximizer'
 " languages
 Plug 'dart-lang/dart-vim-plugin'
-Plug 'thosakwe/vim-flutter'
+" Plug 'thosakwe/vim-flutter'
+Plug 'Neevash/awesome-flutter-snippets'
+Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
 call plug#end()
 
 " Some basics:
@@ -209,6 +209,12 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+" Snippets
+let g:UltiSnipsExpandTrigger="<c-s>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+let g:UltiSnipsJumpBackwardTrigger="<c-p>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetsDir="~/.config/nvim/ultisnips/"
 
 " Dart specific configurations
 " https://github.com/dart-lang/dart-vim-plugin/blob/master/README.md#how-do-i-configure-an-lsp-plugin-to-start-the-analysis-server

@@ -11,14 +11,12 @@ Plug 'arcticicestudio/nord-vim'
 " Nice status bar
 Plug 'itchyny/lightline.vim'
 
-" enhance netrw
-" Plug 'tpope/vim-vinegar'
 " manipulate ' " [ { easier
 Plug 'tpope/vim-surround'
 " Auto close parens, braces, brackets, etc
 Plug 'Raimondi/delimitMate'
 " Plug 'jiangmiao/auto-pairs'
-" Show vcs stuff 
+" Show vcs stuff
 Plug 'mhinz/vim-signify'
 " Git tool
 Plug 'tpope/vim-fugitive'
@@ -29,7 +27,6 @@ Plug 'christoomey/vim-tmux-navigator'
 " focus content
 " CSS colorizer
 Plug 'lilydjwg/colorizer'
-" Plug 'chrisbra/Colorizer'
 " Highlight trailing whitespaces
 Plug 'ntpeters/vim-better-whitespace'
 " Indicator for what was yanked
@@ -38,7 +35,7 @@ Plug 'machakann/vim-highlightedyank'
 " Fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" Better than grepping Plug 'mileszs/ack.vim' alignment made easy in Visual mode!  
+" Better than grepping Plug 'mileszs/ack.vim' alignment made easy in Visual mode!
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install()}}
 
 " Plug 'junegunn/goyo.vim'
@@ -52,8 +49,10 @@ Plug 'mattn/calendar-vim'
 Plug 'szw/vim-maximizer'
 " languages
 Plug 'dart-lang/dart-vim-plugin'
+" Plug 'thosakwe/vim-flutter'
+Plug 'Neevash/awesome-flutter-snippets'
 Plug 'honza/vim-snippets'
-Plug 'Nash0x7E2/awesome-flutter-snippets'
+Plug 'SirVer/ultisnips'
 call plug#end()
 
 " Some basics:
@@ -188,7 +187,7 @@ let g:vimwiki_list = [
         \ {'path': '~/Nextcloud/vimwiki/nolessthanepic', 'syntax': 'markdown', 'ext': '.md'},
         \ {'path': '~/Nextcloud/vimwiki/','auto_tags':1}]
 
-" vim instant markdon 
+" vim instant markdon
 let g:instant_markdown_autostart = 0 " no autostart
 map <leader>md :InstantMarkdownPreview<CR>
 

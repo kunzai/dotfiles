@@ -1,8 +1,8 @@
+" SPACE as leader
 let mapleader = " "
 
-" disable python2
-" let g:loaded_python_provider = 0
-let g:python_host_prog  = '/usr/bin/python2'
+" disable python2 and set path to python3
+let g:loaded_python_provider = 0
 let g:python3_host_prog  = '/usr/bin/python3'
 
 " Specify a directory for plugins
@@ -16,7 +16,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 " Auto close parens, braces, brackets, etc
 Plug 'Raimondi/delimitMate'
-" Plug 'jiangmiao/auto-pairs'
 " Show vcs stuff
 Plug 'mhinz/vim-signify'
 " Git tool
@@ -25,7 +24,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdcommenter'
 " Seamless switching between tmux and vim
 Plug 'christoomey/vim-tmux-navigator'
-" focus content
 " CSS colorizer
 Plug 'lilydjwg/colorizer'
 " Highlight trailing whitespaces
@@ -33,13 +31,17 @@ Plug 'ntpeters/vim-better-whitespace'
 " Indicator for what was yanked
 Plug 'machakann/vim-highlightedyank'
 
+Plug 'sheerun/vim-polyglot'
+
 " Fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" Better than grepping Plug 'mileszs/ack.vim' alignment made easy in Visual mode!  Plug 'junegunn/vim-easy-align'
+" Better than grepping Plug 'mileszs/ack.vim' alignment made easy in Visual mode!
+Plug 'junegunn/vim-easy-align'
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install()}}
+Plug 'josa42/vim-lightline-coc'
 
-" Plug 'junegunn/goyo.vim'
+Plug 'mileszs/ack.vim'
 Plug 'jremmen/vim-ripgrep'
 " Notes / Wiki
 Plug 'vimwiki/vimwiki'
@@ -48,12 +50,11 @@ Plug 'mattn/calendar-vim'
 
 " zoom in and out
 Plug 'szw/vim-maximizer'
+
 " languages
 Plug 'dart-lang/dart-vim-plugin'
-" Plug 'thosakwe/vim-flutter'
-Plug 'Neevash/awesome-flutter-snippets'
 Plug 'honza/vim-snippets'
-Plug 'SirVer/ultisnips'
+Plug 'Neevash/awesome-flutter-snippets'
 call plug#end()
 
 " Some basics:
@@ -61,20 +62,16 @@ filetype plugin on
 syntax on
 set encoding=utf-8
 
-" Line numbers should appear so:
-" set number
 set number relativenumber
-
-" panes split how:
-set splitbelow splitright
+set splitbelow splitright " pane split
 
 " Search not case-sensitive when only lower-case chars used
 set incsearch
 set ignorecase
 set smartcase
 set noswapfile
-" get rid of second mode display, lightline handles this
-set noshowmode
+set noshowmode " get rid of second mode display, lightline handles this
+
 " netrw
 let g:netrw_banner = 0 " remove banner on top
 let g:netrw_liststyle = 3 " show tree listing
@@ -96,23 +93,40 @@ set wildmenu
 " autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " lightline configurarion
-let g:lightline = {
-      \ 'colorscheme': 'nord',
- \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'relativepath', 'modified', 'paste', 'bufnum' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
-      \ }, 
-  \ }
+" let g:lightline = {
+      " \ 'colorscheme': 'nord',
+ " \ 'active': {
+      " \   'left': [ [ 'mode', 'paste' ],
+      " \             ['coc_status', 'gitbranch', 'readonly', 'relativepath', 'modified', 'paste', 'bufnum' ] ]
+      " \ },
+      " \ 'component_function': {
+      " \   'gitbranch': 'FugitiveHead'
+      " \ },
+  " \ }
+
+" {{{ LightLine
+function! LightLineFilename()
+  return expand('%')
+endfunction
+
+set statusline+=%h
+let g:lightline = { 'active': {  } }
+let g:lightline.active.left = [
+  \  ['mode', 'paste'],
+  \  [  'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' , 'coc_status', 'gitbranch', 'readonly', 'relativepath', 'modified', 'paste', 'bufnum']
+  \]
+let g:lightline.active.right = [
+  \      ['lineinfo'], ['fileformat', 'filetype']
+  \]
+let g:lightline.colorscheme = 'nord'
+
 set laststatus=2
+" register compoments:
+call lightline#coc#register()
 
-" use this colorscheme
-colorscheme nord
+colorscheme nord " use this colorscheme
 
-" Highlight the line the cursor is on.
-" set cursorline
+" set cursorline " Highlight the line the cursor is on.
 
 " folding options
 set foldmethod=syntax
@@ -120,7 +134,7 @@ set foldnestmax=10
 set nofoldenable
 " set foldlevel=2
 
-" map vertical resize
+" map easy resizing
 nnoremap <silent> <Leader>= :resize +10 <CR>
 nnoremap <silent> <Leader>' :resize -10 <CR>
 nnoremap <silent> <Leader>[ :vertical resize -10 <CR>
@@ -129,9 +143,9 @@ nnoremap <silent> <Leader>] :vertical resize +10 <CR>
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-" read/write file when switching buffers
-set autowrite
-set autoread
+set autowrite " write file when switching buffers
+set autoread  " read file when switching buffers
+
 
 " tab settings
 set shiftwidth=2
@@ -155,6 +169,9 @@ set clipboard+=unnamedplus
 nnoremap <Left> :tabprevious<CR>
 nnoremap <Right> :tabnext<CR>
 
+" search will center on the line it's found in.
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 " Enable true color
 if exists('+termguicolors')
@@ -180,13 +197,14 @@ nnoremap <leader>gb :Buffers<CR>
 
 " vimwiki configurarion
 let g:vimwiki_list = [
-        \ {'path': '~/vimwiki/work', 'syntax': 'markdown', 'ext': '.md'},
-        \ {'path': '~/vimwiki/private', 'syntax': 'markdown', 'ext': '.md'},
-        \ {'path': '~/vimwiki/nolessthanepic', 'syntax': 'markdown', 'ext': '.md'},
-        \{'path': '~/vimwiki/','auto_tags':1}]
+        \ {'path': '~/Nextcloud/vimwiki/work', 'syntax': 'markdown', 'ext': '.md'},
+        \ {'path': '~/Nextcloud/vimwiki/private', 'syntax': 'markdown', 'ext': '.md'},
+        \ {'path': '~/Nextcloud/vimwiki/nolessthanepic', 'syntax': 'markdown', 'ext': '.md'},
+        \{'path': '~/Nextcloud/vimwiki/','auto_tags':1}]
 
 " vim instant markdon 
 let g:instant_markdown_autostart = 0 " no autostart
+let g:instant_markdown_browser = "qutebrowser"
 map <leader>md :InstantMarkdownPreview<CR>
 
 " set swapfile
@@ -210,37 +228,33 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " Snippets
-let g:UltiSnipsExpandTrigger="<c-s>"
-let g:UltiSnipsJumpForwardTrigger="<c-n>"
-let g:UltiSnipsJumpBackwardTrigger="<c-p>"
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetsDir="~/.config/nvim/ultisnips/"
+" let g:UltiSnipsExpandTrigger="<c-s>"
+" let g:UltiSnipsJumpForwardTrigger="<c-n>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-p>"
+" let g:UltiSnipsEditSplit="vertical"
+" let g:UltiSnipsSnippetsDir="~/.config/nvim/ultisnips/"
 
 " Dart specific configurations
+let g:lsc_server_commands = {'dart': '/opt/flutter/bin/cache/dart-sdk/bin/snapshots/analysis_server.dart.snapshot --lsp'}
 " https://github.com/dart-lang/dart-vim-plugin/blob/master/README.md#how-do-i-configure-an-lsp-plugin-to-start-the-analysis-server
-" let g:lsc_auto_map = v:true
+let g:lsc_auto_map = v:true
 " hightlight html inside dart files
 let dart_html_in_string=v:true
 " two space intendation
 let g:dart_style_guide = 2
 " format on save
-let g:dart_format_on_save = 1
-
-" vim-flutter conf
-nnoremap <leader>fr :FlutterRun<cr>
-nnoremap <leader>fq :FlutterQuit<cr>
-nnoremap <leader>fr :FlutterHotReload<cr>
-nnoremap <leader>fR :FlutterHotRestart<cr>
-nnoremap <leader>fD :FlutterVisualDebug<cr>
+" let g:dart_format_on_save = 1
 
 " prettier start
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 " configuration needed for vim-lsp
 " :lua << EOF
-" require'nvim_lsp'.tsserver.setup{}
-" require'nvim_lsp'.html.setup{}
-" require'nvim_lsp'.dartls.setup{}
+" require'lspconfig'.tsserver.setup{}
+" require'lspconfig'.html.setup{}
+" require'lspconfig'.dartls.setup{
+  " cmd = { "dart", "/home/kunzai/snap/flutter/common/flutter/bin/cache/dart-sdk/bin/snapshots/analysis_server.dart.snapshot", "--lsp"}
+" }
 " EOF
 
 " mhinz-signify settings

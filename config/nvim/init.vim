@@ -2,7 +2,6 @@ let mapleader = " "
 
 " disable python2
 let g:loaded_python_provider = 0
-
 let g:python3_host_prog  = '/usr/bin/python3'
 
 " Specify a directory for plugins
@@ -39,7 +38,7 @@ Plug 'machakann/vim-highlightedyank'
 " Fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" Better than grepping Plug 'mileszs/ack.vim' alignment made easy in Visual mode!  Plug 'junegunn/vim-easy-align'
+" Better than grepping Plug 'mileszs/ack.vim' alignment made easy in Visual mode!  
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': { -> coc#util#install()}}
 
 " Plug 'junegunn/goyo.vim'
@@ -53,7 +52,8 @@ Plug 'mattn/calendar-vim'
 Plug 'szw/vim-maximizer'
 " languages
 Plug 'dart-lang/dart-vim-plugin'
-Plug 'thosakwe/vim-flutter'
+Plug 'honza/vim-snippets'
+Plug 'Nash0x7E2/awesome-flutter-snippets'
 call plug#end()
 
 " Some basics:
@@ -100,13 +100,16 @@ let g:lightline = {
       \ 'colorscheme': 'nord',
  \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'relativepath', 'modified', 'paste', 'bufnum' ] ]
+      \             [ 'cocstatus', 'gitbranch', 'readonly', 'relativepath', 'modified', 'paste', 'bufnum' ] ]
       \ },
       \ 'component_function': {
+      \   'cocstatus': 'coc#status',
       \   'gitbranch': 'FugitiveHead'
-      \ }, 
+      \ },
   \ }
 set laststatus=2
+" Use autocmd to force lightline update.
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 " use this colorscheme
 colorscheme nord
@@ -180,10 +183,10 @@ nnoremap <leader>gb :Buffers<CR>
 
 " vimwiki configurarion
 let g:vimwiki_list = [
-        \ {'path': '~/vimwiki/work', 'syntax': 'markdown', 'ext': '.md'},
-        \ {'path': '~/vimwiki/private', 'syntax': 'markdown', 'ext': '.md'},
-        \ {'path': '~/vimwiki/nolessthanepic', 'syntax': 'markdown', 'ext': '.md'},
-        \{'path': '~/vimwiki/','auto_tags':1}]
+        \ {'path': '~/Nextcloud/vimwiki/work', 'syntax': 'markdown', 'ext': '.md'},
+        \ {'path': '~/Nextcloud/vimwiki/private', 'syntax': 'markdown', 'ext': '.md'},
+        \ {'path': '~/Nextcloud/vimwiki/nolessthanepic', 'syntax': 'markdown', 'ext': '.md'},
+        \ {'path': '~/Nextcloud/vimwiki/','auto_tags':1}]
 
 " vim instant markdon 
 let g:instant_markdown_autostart = 0 " no autostart
@@ -204,12 +207,6 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 
 
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-
 " Dart specific configurations
 " https://github.com/dart-lang/dart-vim-plugin/blob/master/README.md#how-do-i-configure-an-lsp-plugin-to-start-the-analysis-server
 " let g:lsc_auto_map = v:true
@@ -220,13 +217,34 @@ let g:dart_style_guide = 2
 " format on save
 let g:dart_format_on_save = 1
 
-" vim-flutter conf
-nnoremap <leader>fr :FlutterRun<cr>
-nnoremap <leader>fq :FlutterQuit<cr>
-nnoremap <leader>fr :FlutterHotReload<cr>
-nnoremap <leader>fR :FlutterHotRestart<cr>
-nnoremap <leader>fD :FlutterVisualDebug<cr>
+" vim-snipets "*************************************
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
 
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" vim-snipets "*************************************
+
+
+let g:coc_snippet_next = '<tab>'
 " prettier start
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 

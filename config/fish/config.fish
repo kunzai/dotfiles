@@ -3,10 +3,20 @@ set -g theme_powerline_fonts no
 set -g theme_nerd_fonts yes
 
 # set -gx FZF_DEFAULT_COMMAND 'rg --files --follow --no-ignore-vcs --hidden -g "!{node_modules/*,.git/*}"'
-set -gx EDITOR /usr/local/bin/nvim
+# add flutter to the path
+set -gx PATH /opt/flutter/bin $PATH
+set -gx PATH /opt/android-studio/bin $PATH
+
+# add dart to the path
+# set -gx PATH ~/.pub-cache/bin $PATH
+# set -gx PATH ~/.gem/ruby/2.7.0/bin $PATH
+# set -gx PATH /usr/bin/perl $PATH
+# set -gx PATH /usr/bin/vendor_perl $PATH
+
+# set -gx EDITOR /usr/local/bin/nvim
 # set -gx TERM "screen-256color"
 
-set -gx CHROME_EXECUTABLE /opt/google/chrome/chrome
+# set -gx CHROME_EXECUTABLE /opt/google/chrome/chrome
 alias google-chrome "google-chrome-stable"
 
 # enable images on term for twitter
@@ -41,3 +51,11 @@ end
 # source /usr/share/powerline/bindings/fish/powerline-setup.fish
 # powerline-setup
 
+# perl cpan environment variables
+set -x PATH /home/kunzai/perl5/bin $PATH ^/dev/null;
+set -q PERL5LIB; and set -x PERL5LIB /home/kunzai/perl5/lib/perl5:$PERL5LIB;
+set -q PERL5LIB; or set -x PERL5LIB /home/kunzai/perl5/lib/perl5;
+set -q PERL_LOCAL_LIB_ROOT; and set -x PERL_LOCAL_LIB_ROOT /home/kunzai/perl5:$PERL_LOCAL_LIB_ROOT;
+set -q PERL_LOCAL_LIB_ROOT; or set -x PERL_LOCAL_LIB_ROOT /home/kunzai/perl5;
+set -x PERL_MB_OPT --install_base\ \"/home/kunzai/perl5\";
+set -x PERL_MM_OPT INSTALL_BASE=/home/kunzai/perl5;

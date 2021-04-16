@@ -28,7 +28,10 @@ floating_modifier $mod
 
 # start a terminal
 # bindsym $mod+Return exec terminal
+<<<<<<< HEAD
 # bindsym $mod+Return exec /usr/bin/alacritty
+=======
+>>>>>>> 3151a2e19906843ce8b8804f6b03889fe512dce2
 bindsym $mod+Return exec /usr/bin/kitty
 
 # kill focused window
@@ -308,7 +311,7 @@ exec --no-startup-id xautolock -time 30 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
-exec --no-startup-id /home/kunzai/.screenlayout/gaming.sh
+exec --no-startup-id /home/kunzai/.screenlayout/main.sh
 # exec --no-startup-id wine /home/kunzai/.wine/drive_c/Program\ Files\ \(x86\)/TradeSkillMaster\ Application/app/TSMApplication.exe
 exec --no-startup-id lutris
 

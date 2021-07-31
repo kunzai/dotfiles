@@ -61,6 +61,7 @@ Plug 'honza/vim-snippets'
 Plug 'Neevash/awesome-flutter-snippets'
 Plug 'dsawardekar/wordpress.vim'
 Plug 'jwalton512/vim-blade'
+Plug 'thosakwe/vim-flutter'
 call plug#end()
 
 " Some basics:
@@ -94,6 +95,11 @@ autocmd FileType netrw setl bufhidden=delete " or use :qa!
 set nocompatible
 set path+=**
 set wildmenu
+
+" center cursor
+set nowrap
+set sidescrolloff=99
+set scrolloff=99
 
 " Disables automatic commenting on newline:
 " autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -150,6 +156,9 @@ nnoremap <silent> <Leader>' :resize -10 <CR>
 nnoremap <silent> <Leader>[ :vertical resize -10 <CR>
 nnoremap <silent> <Leader>] :vertical resize +10 <CR>
 
+" make : easier to access, overwrite ;
+nnoremap ; :
+
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
@@ -172,7 +181,7 @@ set undofile
 set undodir=/tmp
 set colorcolumn=80
 
-" clipboard sharing ???
+" clipboard, This will cause all yank/delete/paste operations to use the system register *
 set clipboard+=unnamedplus
 
 " Use arrow keys to switch tabs
@@ -230,7 +239,7 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-" Enable NERDCommenterToggle to check all selected lines is commented or not 
+" Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
 
 " Dart specific configurations
@@ -280,7 +289,7 @@ command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 " require'lspconfig'.tsserver.setup{}
 " require'lspconfig'.html.setup{}
 " require'lspconfig'.dartls.setup{
-  " cmd = { "dart", "/home/kunzai/snap/flutter/common/flutter/bin/cache/dart-sdk/bin/snapshots/analysis_server.dart.snapshot", "--lsp"}
+" cmd = { "dart", "/home/kunzai/snap/flutter/common/flutter/bin/cache/dart-sdk/bin/snapshots/analysis_server.dart.snapshot", "--lsp"}
 " }
 " EOF
 

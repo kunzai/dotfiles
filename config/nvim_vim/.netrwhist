@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/media/kunzai/_development/workspace_infographs/template_simple_charts/housing/sharing/4-1-1'
+let g:netrw_dirhist_5='/media/kunzai/_development/workspace_infographs/template_simple_charts/housing/sharing'
+let g:netrw_dirhist_4='/media/kunzai/_development/workspace_infographs/template_simple_charts/housing'
+let g:netrw_dirhist_3='/media/kunzai/_development/workspace_infographs/template_simple_charts/housing/l10n'
+let g:netrw_dirhist_2='/media/kunzai/_development/workspace_infographs/template_simple_charts/housing/l10n/4-1-1'
+let g:netrw_dirhist_1='/home/kunzai/dotfiles/config/fish'
+let g:netrw_dirhist_0='/home/kunzai/dotfiles/config'
+let g:netrw_dirhist_9='/media/kunzai/_development/workspace_infographs/template_simple_charts/ageing/config/1-1'
+let g:netrw_dirhist_8='/media/kunzai/_development/workspace_infographs/template_simple_charts/ageing/config'
+let g:netrw_dirhist_7='/media/kunzai/_development/workspace_infographs/template_simple_charts/ageing'

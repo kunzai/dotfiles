@@ -28,10 +28,7 @@ floating_modifier $mod
 
 # start a terminal
 # bindsym $mod+Return exec terminal
-<<<<<<< HEAD
 # bindsym $mod+Return exec /usr/bin/alacritty
-=======
->>>>>>> 3151a2e19906843ce8b8804f6b03889fe512dce2
 bindsym $mod+Return exec /usr/bin/kitty
 
 # kill focused window

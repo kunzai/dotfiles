@@ -47,6 +47,9 @@ function fish_prompt
     powerline-shell --shell bare $status
 end
 
+set -gx PASSWORD_STORE_ENABLE_EXTENSIONS true
+set -gx PASSWORD_STORE_EXTENSIONS_DIR "$HOME/.local/lib/python3.9/site-packages/usr/lib/password-store/extensions/"
+
 # set fish_function_path $fish_function_path "/usr/share/powerline/bindings/fish"
 # source /usr/share/powerline/bindings/fish/powerline-setup.fish
 # powerline-setup

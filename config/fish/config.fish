@@ -1,5 +1,5 @@
 # change fonts
-set -g theme_powerline_fonts no
+set -g theme_powerline_fonts yes
 set -g theme_nerd_fonts yes
 
 # set -gx FZF_DEFAULT_COMMAND 'rg --files --follow --no-ignore-vcs --hidden -g "!{node_modules/*,.git/*}"'

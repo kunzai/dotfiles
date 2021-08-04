@@ -35,15 +35,22 @@ return require('packer').startup(function()
   use 'mhartington/formatter.nvim'
   use 'norcalli/nvim-colorizer.lua';      -- Colorizer
   use {'ms-jpq/chadtree', branch='chad', run='python3 -m chadtree deps'}; -- tree
-  use {'prettier/vim-prettier', branch='release/0.x', run='yarn install', ft = { "html", "javascript", "typescript", "lua", "dart", "phyton" }};
+  use {'prettier/vim-prettier', branch='release/0.x', run='yarn install', ft = { "html", "javascript", "typescript", "lua", "dart", "python" }};
 
 
   use {
     'vimwiki/vimwiki',
-    opt=true, 
     requires = {'suan/vim-instant-markdown', opt='markdown', 'mattn/calendar-vim'}
   }
 
+  use {
+    'kristijanhusak/orgmode.nvim', config = function()
+      require('orgmode').setup{
+        org_agenda_files = {'~/Nextcloud/org/*', '~/my-orgs/**/*'},
+        org_default_notes_file = '~/Nextcloud/org/refile.org',
+      }
+    end
+  }
   -- flutter 
   use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim'}
   -- debugger 

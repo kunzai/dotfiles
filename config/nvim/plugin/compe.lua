@@ -1,4 +1,5 @@
-local map = vim.api.nvim_set_keymap
+local utils = require("utils")
+local map = utils.keymap
 
 
 require'compe'.setup {
@@ -36,7 +37,7 @@ require'compe'.setup {
   };
 }
 
-options = { noremap = true, silent = true, expr = true }
+options = { silent = true, expr = true }
 map('i', '<C-Space>', 'compe#complete()', options)
 
 

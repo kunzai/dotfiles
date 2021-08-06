@@ -1,10 +1,11 @@
 lastupdatecheck: 0
 recentrepos:
 - /home/kunzai/dotfiles
+- /home/kunzai/development/workspace_flutter/sword/swordlive-mobile
+- /home/kunzai/.password-store
 - /home/kunzai/development/workspace_infographs/template_simple_charts/keyfigures
 - /home/kunzai/development/workspace_infographs/template_simple_charts/covid
 - /home/kunzai/development/workspace_infographs/template_simple_charts/ageing
 - /home/kunzai/development/workspace_infographs/template_simple_charts/statexpl-info-unemployment
-- /home/kunzai/.password-store
 - /home/kunzai/development/workspace_infographs/template_simple_charts/statexpl-info-employment
 startuppopupversion: 5

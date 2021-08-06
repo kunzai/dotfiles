@@ -1,2 +1,4 @@
 config/nvim/.netrwbook
 config/nvim/.netrwhist
+config/nvim/undo/
+~/.config/nvim/undo

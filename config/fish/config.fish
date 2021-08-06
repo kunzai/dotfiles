@@ -13,7 +13,7 @@ set -gx PATH /opt/android-studio/bin $PATH
 # set -gx PATH /usr/bin/perl $PATH
 # set -gx PATH /usr/bin/vendor_perl $PATH
 
-# set -gx EDITOR /usr/local/bin/nvim
+set -gx EDITOR /usr/bin/nvim
 # set -gx TERM "screen-256color"
 
 # set -gx CHROME_EXECUTABLE /opt/google/chrome/chrome

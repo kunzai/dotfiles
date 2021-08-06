@@ -7,7 +7,7 @@ o.pumheight        = 15
 o.pumblend         = 20
 o.clipboard        = 'unnamedplus' -- Allow use of system clipboard
 o.wildoptions      = 'pum'         -- Don't use GUI tabline
-o.completeopt      = [[longest,menuone,noselect]]
+o.completeopt      = [[menuone,noselect]]
 o.whichwrap        = 'h,l,<,>,[,],~'
 o.listchars        = 'tab:»·,trail:·,nbsp:·,precedes:«,extends:»'
 o.backspace        = [[indent,eol,start]]  -- Intuitive backspacing in insert mode
@@ -21,7 +21,10 @@ o.fileformats      = 'unix,dos' -- File type preferences
 o.inccommand       = 'nosplit'  -- live preview the :substitute command
 o.showbreak        = "\\\\"
 o.report           = 0
+o.undofile         = true       -- use undo file
+o.undodir          = '~/.config/nvim/undo'
 o.undolevels       = 2000       -- Number of undo levels
+o.undoreload       = 10000
 o.laststatus       = 2          -- Always show the status line
 o.showtabline      = 0          -- Show no tabline
 o.updatetime       = 250        -- Frequency update
@@ -75,6 +78,7 @@ o.wildignore       = o.wildignore .. '*.swp,*~,._*,*/vendor/cache/*'
 
 -- window-local options
 wo.number          = true       -- Show line numbers
+wo.relativenumber  = true
 wo.foldmethod      = 'marker'   -- Autofolding
 wo.foldmarker      = '/*,*/'
 wo.foldnestmax     = 10

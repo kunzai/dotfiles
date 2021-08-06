@@ -27,18 +27,21 @@ require'compe'.setup {
   source = {
     path = true;
     buffer = true;
-    calc = true;
+    calc = false;
     nvim_lsp = true;
     nvim_lua = true;
     treesitter = true;
-    vsnip = true;
-    ultisnips = true;
+    vsnip = false;
+    ultisnips = false;
     luasnip = true;
   };
 }
 
 options = { silent = true, expr = true }
 map('i', '<C-Space>', 'compe#complete()', options)
+map('i', '<CR>', 'compe#confirm(luaeval("require \'nvim-autopairs\'.autopairs_cr()"))', options)
+map('i', '<C-f>', 'compe#scroll({ \'delta\': +4 })', options)
+map('i', '<C-d>', 'compe#scroll({ \'delta\': -4 })', options)
 
 
 -- inoremap <silent><expr> <C-Space> compe#complete()
@@ -46,3 +49,6 @@ map('i', '<C-Space>', 'compe#complete()', options)
 -- inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 -- inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 -- inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
+
+

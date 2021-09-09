@@ -6,7 +6,7 @@ map('n', '<Space>', '', {})
 vim.g.mapleader = ' '  -- 'vim.g' sets global variables
 
 
-optsilent = { silent = true }
+local optsilent = { silent = true }
 map('n', '<leader><esc>', ':nohlsearch<cr>')
 map('n', '<leader>n', ':bnext<cr>')
 map('n', '<leader>p', ':bprev<cr>')

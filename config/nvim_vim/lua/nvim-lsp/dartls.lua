@@ -5,7 +5,7 @@ require'nvim_lsp'.dartls.setup{}
     filetypes = { "dart" }
     init_options = {
       closingLabels = "true",
-      fluttreOutline = "false",
+      flutterOutline = "false",
       onlyAnalyzeProjectsWithOpenFiles = "false",
       outline = "true",
       suggestFromUnimportedLibraries = "true"

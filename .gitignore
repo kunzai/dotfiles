@@ -4,3 +4,4 @@ config/nvim/undo/
 config/nvim/undo
 ~/.config/nvim/undo
 config/lazygit/state.yml
+config/nvim/plugin/packer_compiled.lua

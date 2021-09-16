@@ -22,14 +22,21 @@ return require("packer").startup(
     use "christoomey/vim-tmux-navigator" -- easier navigtion
 
     use "neovim/nvim-lspconfig" --
+    use "kabouzeid/nvim-lspinstall"
     use "glepnir/lspsaga.nvim"
     use {"ms-jpq/coq_nvim", branch = "coq"} -- main one
     use {"ms-jpq/coq.artifacts", branch = "artifacts"} -- 9000+ Snippets
-    use "kabouzeid/nvim-lspinstall"
 
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
 
-    use "hrsh7th/nvim-compe"
+-- Install nvim-cmp, and buffer source as a dependency
+    -- use {
+      -- "hrsh7th/nvim-cmp",
+      -- requires = {
+        -- "hrsh7th/vim-vsnip",
+        -- "hrsh7th/cmp-buffer",
+      -- }
+    -- }
     use "hoob3rt/lualine.nvim" -- statusbar
     use "kyazdani42/nvim-web-devicons" -- icons for statusbar
     use {

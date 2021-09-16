@@ -7,4 +7,7 @@ vim.schedule(function ()
   lsp.cssls.setup(require("coq")().lsp_ensure_capabilities())
   lsp.html.setup(require("coq")().lsp_ensure_capabilities())
   lsp.dartls.setup(require("coq")().lsp_ensure_capabilities())
+  lsp.jsonls.setup(require("coq")().lsp_ensure_capabilities())
 end)
+
+vim.g.coq_settings = { auto_start = true }

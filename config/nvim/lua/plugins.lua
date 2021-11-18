@@ -23,20 +23,25 @@ return require("packer").startup(
 
     use "neovim/nvim-lspconfig" --
     use "kabouzeid/nvim-lspinstall"
-    use "glepnir/lspsaga.nvim"
-    use {"ms-jpq/coq_nvim", branch = "coq"} -- main one
-    use {"ms-jpq/coq.artifacts", branch = "artifacts"} -- 9000+ Snippets
+    -- use { 'tami5/lspsaga.nvim' } 
+    -- use {"ms-jpq/coq_nvim", branch = "coq"} -- main one
+    -- use {"ms-jpq/coq.artifacts", branch = "artifacts"} -- 9000+ Snippets
+    use 'RishabhRD/popfix'
+    use 'RishabhRD/nvim-lsputils'
 
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
-
--- Install nvim-cmp, and buffer source as a dependency
-    -- use {
-      -- "hrsh7th/nvim-cmp",
-      -- requires = {
-        -- "hrsh7th/vim-vsnip",
-        -- "hrsh7th/cmp-buffer",
-      -- }
-    -- }
+    use {
+      "hrsh7th/nvim-cmp",
+      requires = {
+        "hrsh7th/vim-vsnip",
+        "hrsh7th/cmp-buffer",
+        'hrsh7th/cmp-path',
+        'hrsh7th/cmp-cmdline',
+        'hrsh7th/cmp-nvim-lsp',
+        'L3MON4D3/LuaSnip',
+        'saadparwaiz1/cmp_luasnip'
+      }
+    }
     use "hoob3rt/lualine.nvim" -- statusbar
     use "kyazdani42/nvim-web-devicons" -- icons for statusbar
     use {
@@ -59,15 +64,15 @@ return require("packer").startup(
       requires = {"suan/vim-instant-markdown", opt = "markdown", "mattn/calendar-vim"}
     }
 
-    use {
-      "kristijanhusak/orgmode.nvim",
-      config = function()
-        require("orgmode").setup {
-          org_agenda_files = {"~/Nextcloud/org/*", "~/my-orgs/**/*"},
-          org_default_notes_file = "~/Nextcloud/org/refile.org"
-        }
-      end
-    }
+    -- use {
+      -- "kristijanhusak/orgmode.nvim",
+      -- config = function()
+        -- require("orgmode").setup {
+          -- org_agenda_files = {"~/Nextcloud/org/*", "~/my-orgs/**/*"},
+          -- org_default_notes_file = "~/Nextcloud/org/refile.org"
+        -- }
+      -- end
+    -- }
     -- flutter
     use {"akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim"}
     use {"dart-lang/dart-vim-plugin"}

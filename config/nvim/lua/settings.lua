@@ -7,7 +7,7 @@ o.pumheight        = 15
 o.pumblend         = 20
 o.clipboard        = 'unnamedplus' -- Allow use of system clipboard
 o.wildoptions      = 'pum'         -- Don't use GUI tabline
-o.completeopt      = [[menuone,noselect]]
+o.completeopt      = [[menuone,noselect,noinsert]]
 o.whichwrap        = 'h,l,<,>,[,],~'
 o.listchars        = 'tab:»·,trail:·,nbsp:·,precedes:«,extends:»'
 o.backspace        = [[indent,eol,start]]  -- Intuitive backspacing in insert mode
@@ -22,7 +22,7 @@ o.inccommand       = 'nosplit'  -- live preview the :substitute command
 o.showbreak        = "\\\\"
 o.report           = 0
 o.undofile         = true       -- use undo file
-o.undodir          = '~/.config/nvim/undo'
+-- o.undodir          = "/home/kunzai/.config/nvim/undo" NOT WORKING
 o.undolevels       = 2000       -- Number of undo levels
 o.undoreload       = 10000
 o.laststatus       = 2          -- Always show the status line
@@ -33,7 +33,7 @@ o.sidescrolloff    = 99         -- Keep at least 5 lines left/right
 o.showmatch        = true       -- Highlight matching brace
 o.title            = false       -- change the terminal's title
 o.lazyredraw       = true       -- Only redraw when necessary
-o.splitbelow       = true       -- New splits open to right and bottom 
+o.splitbelow       = true       -- New splits open to right and bottom
 o.splitright       = true
 o.hlsearch         = true       -- Search highlighting
 o.incsearch        = true       -- Search starts while entering string
@@ -66,7 +66,7 @@ o.autowrite        = true       -- Write files when switching buffers
 o.autoread         = true       -- Read files when switching buffers
 o.termguicolors    = true       -- Enable 24RGB
 
---   A list of file patterns to ignore when performing expansion and completion.
+-- A list of file patterns to ignore when performing expansion and completion.
 o.wildignore       = o.wildignore .. '*.so,/min/*'
 o.wildignore       = o.wildignore .. '.git,.hg,.svn,.stversions,*.pyc,*.spl,*.o,*.out,*~,%*'
 o.wildignore       = o.wildignore .. '*.jpg,*.jpeg,*.png,*.gif,*.log,**/tmp/**'
@@ -95,3 +95,4 @@ bo.copyindent      = true        -- Copy the structure of existing line's indent
 -- highlight yanked stuff
 vim.api.nvim_command('au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}')
 
+vim.cmd "set undodir=~/.config/nvim/undo"

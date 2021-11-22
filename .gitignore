@@ -1,9 +1,20 @@
 config/nvim/.netrwbook
 config/nvim/.netrwhist
 config/nvim/undo/
+config/nvim/undo
 ~/.config/nvim/undo
 
 config/nvim/lua/packer_plugins.bak
 config/nvim/~/.config/nvim/undo/%Users%kunzai%.dotfiles%config%nvim%init.lua
 config/nvim/~/.config/nvim/undo
 config/~/.config/nvim/undo
+config/lazygit/state.yml
+config/nvim/plugin/packer_compiled.lua
+
+config/.ipynb_checkpoints/Untitled-checkpoint.ipynb
+config/.ipynb_checkpoints/Untitled1-checkpoint.ipynb
+config/Untitled1.ipynb
+config/Untitled.ipynb
+
+config/nvim/plugin/packer_compiled.lua
+config/nvim/plugin/packer_compiled.lua

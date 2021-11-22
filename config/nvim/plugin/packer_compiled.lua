@@ -44,8 +44,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/kunzai/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/kunzai/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/kunzai/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/kunzai/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/kunzai/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "/Users/kunzai/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/Users/kunzai/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/Users/kunzai/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/Users/kunzai/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/Users/kunzai/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -71,128 +71,162 @@ time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   LuaSnip = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/LuaSnip"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    url = "https://github.com/L3MON4D3/LuaSnip"
   },
   ["calendar-vim"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/calendar-vim"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/calendar-vim",
+    url = "https://github.com/mattn/calendar-vim"
   },
   chadtree = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/chadtree"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/chadtree",
+    url = "https://github.com/ms-jpq/chadtree"
   },
   ["commented.nvim"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/commented.nvim"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/commented.nvim",
+    url = "https://github.com/winston0410/commented.nvim"
+  },
+  ["dart-vim-plugin"] = {
+    loaded = true,
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/dart-vim-plugin",
+    url = "https://github.com/dart-lang/dart-vim-plugin"
   },
   ["flutter-tools.nvim"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/flutter-tools.nvim"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/flutter-tools.nvim",
+    url = "https://github.com/akinsho/flutter-tools.nvim"
   },
   ["formatter.nvim"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/formatter.nvim"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/formatter.nvim",
+    url = "https://github.com/mhartington/formatter.nvim"
   },
   ["friendly-snippets"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/friendly-snippets"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/friendly-snippets",
+    url = "https://github.com/rafamadriz/friendly-snippets"
   },
   ["lspsaga.nvim"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
+    url = "https://github.com/glepnir/lspsaga.nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/lualine.nvim"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+    url = "https://github.com/hoob3rt/lualine.nvim"
+  },
+  neon = {
+    loaded = true,
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/neon",
+    url = "https://github.com/rafamadriz/neon"
   },
   ["nord.nvim"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/nord.nvim"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/nord.nvim",
+    url = "https://github.com/shaunsingh/nord.nvim"
   },
   ["nvim-autopairs"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/nvim-autopairs"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
+    url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-colorizer.lua"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
+    url = "https://github.com/norcalli/nvim-colorizer.lua"
   },
   ["nvim-compe"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/nvim-compe"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/nvim-compe",
+    url = "https://github.com/hrsh7th/nvim-compe"
   },
   ["nvim-dap"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/nvim-dap"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/nvim-dap",
+    url = "https://github.com/mfussenegger/nvim-dap"
   },
   ["nvim-dap-ui"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/nvim-dap-ui"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
+    url = "https://github.com/rcarriga/nvim-dap-ui"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+    url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-treesitter"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
-  },
-  ["orgmode.nvim"] = {
-    config = { "\27LJ\2\2¬\1\0\0\3\0\6\0\t6\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\4\0005\2\3\0=\2\5\1B\0\2\1K\0\1\0\21org_agenda_files\1\0\1\27org_default_notes_file\31~/Nextcloud/org/refile.org\1\3\0\0\22~/Nextcloud/org/*\19~/my-orgs/**/*\nsetup\forgmode\frequire\0" },
-    loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/orgmode.nvim"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+    url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["packer.nvim"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/packer.nvim",
+    url = "https://github.com/wbthomason/packer.nvim"
   },
   ["plenary.nvim"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/plenary.nvim"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+    url = "https://github.com/nvim-lua/plenary.nvim"
   },
   ["popup.nvim"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/popup.nvim"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/popup.nvim",
+    url = "https://github.com/nvim-lua/popup.nvim"
   },
   ["telescope-fzy-native.nvim"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim",
+    url = "https://github.com/nvim-telescope/telescope-fzy-native.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["vim-fugitive"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/vim-fugitive"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
   },
   ["vim-instant-markdown"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/vim-instant-markdown"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/vim-instant-markdown",
+    url = "https://github.com/suan/vim-instant-markdown"
+  },
+  ["vim-prettier"] = {
+    loaded = true,
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/vim-prettier",
+    url = "https://github.com/prettier/vim-prettier"
   },
   ["vim-signify"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/vim-signify"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/vim-signify",
+    url = "https://github.com/mhinz/vim-signify"
   },
   ["vim-tmux-navigator"] = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/vim-tmux-navigator"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/vim-tmux-navigator",
+    url = "https://github.com/christoomey/vim-tmux-navigator"
   },
   vimwiki = {
     loaded = true,
-    path = "/home/kunzai/.local/share/nvim/site/pack/packer/start/vimwiki"
+    path = "/Users/kunzai/.local/share/nvim/site/pack/packer/start/vimwiki",
+    url = "https://github.com/vimwiki/vimwiki"
   }
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: orgmode.nvim
-time([[Config for orgmode.nvim]], true)
-try_loadstring("\27LJ\2\2¬\1\0\0\3\0\6\0\t6\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\4\0005\2\3\0=\2\5\1B\0\2\1K\0\1\0\21org_agenda_files\1\0\1\27org_default_notes_file\31~/Nextcloud/org/refile.org\1\3\0\0\22~/Nextcloud/org/*\19~/my-orgs/**/*\nsetup\forgmode\frequire\0", "config", "orgmode.nvim")
-time([[Config for orgmode.nvim]], false)
 if should_profile then save_profiles() end
 
 end)

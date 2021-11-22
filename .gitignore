@@ -2,3 +2,8 @@ config/nvim/.netrwbook
 config/nvim/.netrwhist
 config/nvim/undo/
 ~/.config/nvim/undo
+
+config/nvim/lua/packer_plugins.bak
+config/nvim/~/.config/nvim/undo/%Users%kunzai%.dotfiles%config%nvim%init.lua
+config/nvim/~/.config/nvim/undo
+config/~/.config/nvim/undo

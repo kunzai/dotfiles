@@ -1,19 +1,24 @@
-local execute = vim.api.nvim_command
-local fn = vim.fn
-
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-
-if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
-  execute 'packadd packer.nvim'
-end
-
--- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
+-- local fn = vim.fn
+-- 
+-- local install_path = fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim'
+-- 
+-- if fn.empty(fn.glob(install_path)) > 0 then
+--   fn.system({'git', 'clone', '--depth=1', 'https://github.com/savq/paq-nvim.git', install_path})
+-- end
+-- 
+-- require "paq" {
+--     "savq/paq-nvim";                  -- Let Paq manage itself
+-- 
+--     "neovim/nvim-lspconfig";          -- Mind the semi-colons
+--     "hrsh7th/nvim-compe";
+-- 
+--     {"lervag/vimtex", opt=true};      -- Use braces when passing options
+-- }
 
 return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
+
   -- themes
   use 'shaunsingh/nord.nvim'
   use 'rafamadriz/neon'
@@ -50,14 +55,14 @@ return require('packer').startup(function()
     requires = {'suan/vim-instant-markdown', opt='markdown', 'mattn/calendar-vim'}
   }
 
-  use {
-    'kristijanhusak/orgmode.nvim', config = function()
-      require('orgmode').setup{
-        org_agenda_files = {'~/Nextcloud/org/*', '~/my-orgs/**/*'},
-        org_default_notes_file = '~/Nextcloud/org/refile.org',
-      }
-    end
-  }
+  -- use {
+    -- 'kristijanhusak/orgmode.nvim', config = function()
+      -- require('orgmode').setup{
+        -- org_agenda_files = {'~/Nextcloud/org/*', '~/my-orgs/**/*'},
+        -- org_default_notes_file = '~/Nextcloud/org/refile.org',
+      -- }
+    -- end
+  -- }
   -- flutter 
   use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim'}
   use {'dart-lang/dart-vim-plugin'}
@@ -70,5 +75,4 @@ return require('packer').startup(function()
     "rafamadriz/friendly-snippets",
   }
   use 'L3MON4D3/LuaSnip'
-
-end)
+  end)

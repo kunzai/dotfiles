@@ -34,13 +34,13 @@ set FZF_DEFAULT_COMMAND 'rg --files'
 fish_vi_key_bindings
 
 # set capslock to esc
-setxkbmap -option caps:ctrl_modifier
+# setxkbmap -option caps:ctrl_modifier
 
 # set nvim PERL environment
-set -gx PERL5LIB /home/kunzai/perl5/lib/perl5
-set -gx PERL_LOCAL_LIB_ROOT /home/kunzai/perl5
-set -gx PERL_MB_OPT '--install_bash "/home/kunzai/perl5"'
-set -gx PERL_MM_OPT INSTALL_BASE=/home/kunzai/perl5PERL5LIB
+# set -gx PERL5LIB /home/kunzai/perl5/lib/perl5
+# set -gx PERL_LOCAL_LIB_ROOT /home/kunzai/perl5
+# set -gx PERL_MB_OPT '--install_bash "/home/kunzai/perl5"'
+# set -gx PERL_MM_OPT INSTALL_BASE=/home/kunzai/perl5PERL5LIB
 
 # powerline-shell
 function fish_prompt

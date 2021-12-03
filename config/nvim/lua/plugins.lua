@@ -57,7 +57,9 @@ return require("packer").startup(
     use {"ms-jpq/chadtree", branch = "chad", run = "python3 -m chadtree deps"} -- tree
     -- use {'prettier/vim-prettier', branch='release/0.x', run='yarn install', ft = { "html", "javascript", "typescript", "lua", "dart", "python" }}
 
-    use {"prettier/vim-prettier"}
+    use 'neovim/nvim-lspconfig'
+    use 'jose-elias-alvarez/null-ls.nvim'
+    use 'MunifTanjim/prettier.nvim'
 
     use {
       "vimwiki/vimwiki",

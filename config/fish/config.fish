@@ -43,9 +43,9 @@ set -gx PERL_MB_OPT '--install_bash "/home/kunzai/perl5"'
 set -gx PERL_MM_OPT INSTALL_BASE=/home/kunzai/perl5PERL5LIB
 
 # powerline-shell
-function fish_prompt
-    powerline-shell --shell bare $status
-end
+# function fish_prompt
+    # powerline-shell --shell bare $status
+# end
 
 set -gx PASSWORD_STORE_ENABLE_EXTENSIONS true
 set -gx PASSWORD_STORE_EXTENSIONS_DIR "$HOME/.local/lib/python3.9/site-packages/usr/lib/password-store/extensions/"

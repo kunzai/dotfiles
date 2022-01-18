@@ -23,6 +23,7 @@ o.showbreak        = "\\\\"
 o.report           = 0
 o.undofile         = true       -- use undo file
 -- o.undodir          = "/home/kunzai/.config/nvim/undo" NOT WORKING
+vim.opt.undodir = vim.fn.stdpath('config') .. '/undo'
 o.undolevels       = 2000       -- Number of undo levels
 o.undoreload       = 10000
 o.laststatus       = 2          -- Always show the status line
@@ -95,4 +96,4 @@ bo.copyindent      = true        -- Copy the structure of existing line's indent
 -- highlight yanked stuff
 vim.api.nvim_command('au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}')
 
-vim.cmd "set undodir=~/.config/nvim/undo"
+-- vim.cmd "set undodir=~/.config/nvim/undo"

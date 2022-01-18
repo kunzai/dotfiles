@@ -21,8 +21,10 @@ return require("packer").startup(
 
     use "christoomey/vim-tmux-navigator" -- easier navigtion
 
-    use "neovim/nvim-lspconfig" --
-    use "kabouzeid/nvim-lspinstall"
+    use {
+        'neovim/nvim-lspconfig',
+        'williamboman/nvim-lsp-installer',
+    }
     -- use { 'tami5/lspsaga.nvim' } 
     -- use {"ms-jpq/coq_nvim", branch = "coq"} -- main one
     -- use {"ms-jpq/coq.artifacts", branch = "artifacts"} -- 9000+ Snippets
@@ -57,24 +59,15 @@ return require("packer").startup(
     use {"ms-jpq/chadtree", branch = "chad", run = "python3 -m chadtree deps"} -- tree
     -- use {'prettier/vim-prettier', branch='release/0.x', run='yarn install', ft = { "html", "javascript", "typescript", "lua", "dart", "python" }}
 
-    use 'neovim/nvim-lspconfig'
     use 'jose-elias-alvarez/null-ls.nvim'
     use 'MunifTanjim/prettier.nvim'
 
     use {
       "vimwiki/vimwiki",
-      requires = {"suan/vim-instant-markdown", opt = "markdown", "mattn/calendar-vim"}
+      requires = {"davidgranstrom/nvim-markdown-preview", opt = "markdown", "mattn/calendar-vim"}
     }
 
-    -- use {
-      -- "kristijanhusak/orgmode.nvim",
-      -- config = function()
-        -- require("orgmode").setup {
-          -- org_agenda_files = {"~/Nextcloud/org/*", "~/my-orgs/**/*"},
-          -- org_default_notes_file = "~/Nextcloud/org/refile.org"
-        -- }
-      -- end
-    -- }
+    use {"evanleck/vim-svelte", branch = "main"}
     -- flutter
     use {"akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim"}
     use {"dart-lang/dart-vim-plugin"}
@@ -86,9 +79,12 @@ return require("packer").startup(
     use {
       "rafamadriz/friendly-snippets"
     }
-    -- use "L3MON4D3/LuaSnip"
+    use "L3MON4D3/LuaSnip"
 
     -- indentiation lines
     use "lukas-reineke/indent-blankline.nvim"
+
+    -- fast search
+    use 'ggandor/lightspeed.nvim'
   end
 )

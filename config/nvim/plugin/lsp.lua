@@ -36,7 +36,7 @@ local nvim_lsp = require('lspconfig')
 -- -- Use a loop to conveniently call 'setup' on multiple servers and
 -- -- map buffer local keybindings when the language server attaches
 -- -- removed dartls as handled by nvim-flutter-tools
-local servers = { "pyright", "tsserver", "cssls", "html", "svelte", "tailwindcss" }
+local servers = { "sumneko_lua", "pyright", "tsserver", "cssls", "html", "svelte", "tailwindcss", "ltex" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -45,3 +45,7 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
+
+require'lspconfig'.tailwindcss.setup {
+    filetypes = { "aspnetcorerazor", "astro", "blade", "django-html", "edge", "eelixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "jade", "leaf", "liquid", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte" },
+}

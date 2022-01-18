@@ -18,7 +18,7 @@ map('n', '<leader>\'', ':resize -10<cr>', optsilent)
 map('n', '<leader>[', ':vertical resize -10<cr>', optsilent)
 map('n', '<leader>]', ':vertical resize +10<cr>', optsilent)
 
-map('n', ';', ':')        -- make : easier to access
+map('n', ';', ':')        -- make :(colon!) easier to access
 map("i", "jj", "<Esc>")   -- escape with jj
 
 -- code actions
@@ -43,7 +43,7 @@ map('n', '<leader>gr', '<cmd>lua vim.lsp.buf.references()<CR>', optsilent)
 map('n', '<C-space>', '<cmd>lua vim.lsp.buf.completion()<CR>', optsilent)
 
 -- diagnostics
-map('n', '<C-n>', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', options)
-map('n', '<C-p>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', options)
-map('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ focusable = false })<CR>', options)
+map('n', '<C-n>', '<cmd>lua vim.diagnostic.goto_prev()<CR>', options)
+map('n', '<C-p>', '<cmd>lua vim.diagnostic.goto_next()<CR>', options)
+map('n', '<leader>e', '<cmd>lua vim.diagnostic.show_line_diagnostics({ focusable = false })<CR>', options)
 

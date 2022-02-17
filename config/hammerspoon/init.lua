@@ -110,8 +110,8 @@ function positionFocusedWindow(x,
    local screen = win:screen()
    local screen_frame = screen:frame()
 
-   win_frame.x = screen_frame.x
-   win_frame.y = screen_frame.y
+   win_frame.x = x
+   win_frame.y = y
    win_frame.w = screen_frame.w * screen_width_fraction
    win_frame.h = screen_frame.h * screen_height_fraction
 
@@ -163,22 +163,22 @@ key_bindings_move = {
    -- Window management hotkeys.
    --
 
-   Q = {positionFocusedWindow, 0, 0, 0.5, 0.5},
+   Q = {positionFocusedWindow, 0, 25, 0.5, 0.5},
    -- 1/3 Third -> T
-   T = {positionFocusedWindow, 0, 0, 0.3, 1},
+   T = {positionFocusedWindow, 0, 25, 0.3, 0.975},
    -- 2/3 tWo-third -> 
-   W = {positionFocusedWindow, 0, 0, 0.7, 1},
+   W = {positionFocusedWindow, 0, 25, 0.7, 0.975},
 
    -- 'Divide' is a poor mnemonic for "Make window half-width, full-height", but
    -- it's what I went with back in the day.
-   D = {positionFocusedWindow, 0, 0, 0.5, 1},
+   D = {positionFocusedWindow, 0, 25, 0.5, 0.975},
 
    -- ';' is not a mnemonic for maximizing a window, but it's next to my other
    -- window manipulation keys.
    --
    -- Note that I dislike OS X's "full screen" functionality. I almost never
    -- want to make all my other windows vanish, which is why I do it this way.
-   [";"] =  {positionFocusedWindow, 0, 0, 1, 1}
+   [";"] =  {positionFocusedWindow, 0, 25, 1, 0.975}
 }
 
 for mnemonic, callback_info in pairs(key_bindings_application) do
@@ -231,7 +231,7 @@ hs.hotkey.bind(move_keys, "H", function()
     local screen_frame = screen:frame()
 
     win_frame.x = screen_frame.x
-    win_frame.y = screen_frame.y
+    win_frame.y = screen_frame.y + 25 -- don't overlap the bar
 
     win:setFrame(win_frame, ANIMATION_DURATION)
 end)
@@ -244,7 +244,7 @@ hs.hotkey.bind(move_keys, "J", function()
     local screen_frame = screen:frame()
 
     win_frame.x = screen_frame.x + screen_frame.w - win_frame.w
-    win_frame.y = screen_frame.y
+    win_frame.y = screen_frame.y + 25
 
     win:setFrame(win_frame, ANIMATION_DURATION)
 end)

@@ -1,5 +1,5 @@
 # change fonts
-# set -g theme_powerline_fonts yes
+set -g theme_powerline_fonts yes
 set -g theme_nerd_fonts yes
 
 # set -gx FZF_DEFAULT_COMMAND 'rg --files --follow --no-ignore-vcs --hidden -g "!{node_modules/*,.git/*}"'
@@ -8,7 +8,7 @@ set -gx PATH /opt/flutter/bin $PATH
 set -gx PATH /opt/android-studio/bin $PATH
 
 # add dart to the path
-# set -gx PATH ~/.pub-cache/bin $PATH
+set -gx PATH ~/.pub-cache/bin $PATH
 # set -gx PATH ~/.gem/ruby/2.7.0/bin $PATH
 # set -gx PATH /usr/bin/perl $PATH
 # set -gx PATH /usr/bin/vendor_perl $PATH

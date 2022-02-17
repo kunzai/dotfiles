@@ -17,9 +17,14 @@ sudo brew services start asimov
 
 # neovim development needed
 sudo pnpm i -g -y prettier
+# lua formtatter
+sudo npm i -g lua-fmt
 
 # svelte
 sudo pnpm i -g -y prettier-plugin-svelte
+# lua
+sudo pnpm i--g prettier @prettier/plugin-lua
+sudo pnpm i -g prettier-plugin-tailwindcss
 
 # live grep for telescope 
 brew install rg

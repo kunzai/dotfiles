@@ -1,7 +1,7 @@
 require'lualine'.setup {
   options = {
     icons_enabled = true,
-    theme = 'neon',
+    theme = 'tokyonight',
     component_separators = {'', ''},
     section_separators = {'', ''},
     disabled_filetypes = {}
@@ -24,5 +24,5 @@ require'lualine'.setup {
   },
   tabline = {
   },
-  extensions = {'chadtree', 'fugitive', 'quickfix'}
+  extensions = {'fugitive', 'quickfix'}
 }

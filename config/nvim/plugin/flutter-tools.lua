@@ -1,4 +1,4 @@
-require("flutter-tools").setup{
+require("flutter-tools").setup {
   ui = {
     -- the border type to use for all floating windows, the same options/formats
     -- used for ":h nvim_open_win" e.g. "single" | "shadow" | {<table-of-eight-chars>}
@@ -16,7 +16,7 @@ require("flutter-tools").setup{
     }
   },
   debugger = { -- integrate with nvim dap + install dart code debugger
-    enabled = true,
+               enabled = true,
   },
   widget_guides = {
     enabled = true,

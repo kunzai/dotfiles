@@ -13,7 +13,7 @@ set -gx PATH ~/.pub-cache/bin $PATH
 # set -gx PATH /usr/bin/perl $PATH
 # set -gx PATH /usr/bin/vendor_perl $PATH
 
-set -gx EDITOR /usr/local/bin/nvim
+set -gx EDITOR /Users/kunzai/.local/bin/lvim
 # set -gx TERM "screen-256color"
 
 # set -gx CHROME_EXECUTABLE /opt/google/chrome/chrome
@@ -62,3 +62,6 @@ set -q PERL_LOCAL_LIB_ROOT; and set -x PERL_LOCAL_LIB_ROOT /home/kunzai/perl5:$P
 set -q PERL_LOCAL_LIB_ROOT; or set -x PERL_LOCAL_LIB_ROOT /home/kunzai/perl5;
 set -x PERL_MB_OPT --install_base\ \"/home/kunzai/perl5\";
 set -x PERL_MM_OPT INSTALL_BASE=/home/kunzai/perl5;
+
+set -gx PNPM_HOME "/Users/kunzai/Library/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH

@@ -20,3 +20,8 @@ config/nvim/plugin/packer_compiled.lua
 config/nvim/plugin/packer_compiled.lua
 
 .DS_Store
+config/nvim/.pnpm-debug.log
+config/fish/fishd.tmp.949KDg
+config/fish/fishd.tmp.9TxDXs
+config/lvim/plugin/packer_compiled.lua
+config/lvim/ignore

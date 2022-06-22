@@ -3,7 +3,7 @@ local map = utils.keymap
 
 -- map the leader key
 map('n', '<Space>', '', {})
-vim.g.mapleader = ' '  -- 'vim.g' sets global variables
+vim.g.mapleader = ' ' -- 'vim.g' sets global variables
 
 
 local optsilent = { silent = true, noremap = true }
@@ -18,12 +18,12 @@ map('n', '<leader>\'', ':resize -10<cr>', optsilent)
 map('n', '<leader>[', ':vertical resize -10<cr>', optsilent)
 map('n', '<leader>]', ':vertical resize +10<cr>', optsilent)
 
-map('n', ';', ':')        -- make :(colon!) easier to access
-map("i", "jj", "<Esc>")   -- escape with jj
+map('n', ';', ':') -- make :(colon!) easier to access
+map("i", "jj", "<Esc>") -- escape with jj
 
 -- code actions
-map('n','<leader>ca', ':lua vim.lsp.buf.code_action()<cr>', optsilent)
-map('v','<leader>ca', ':<C-U>lua vim.lsp.buf.code_action()<cr>', optsilent)
+map('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<cr>', optsilent)
+map('v', '<leader>ca', ':<C-U>lua vim.lsp.buf.code_action()<cr>', optsilent)
 
 -- hovering
 map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', options)
@@ -47,3 +47,6 @@ map('n', '<C-n>', '<cmd>lua vim.diagnostic.goto_prev()<CR>', options)
 map('n', '<C-p>', '<cmd>lua vim.diagnostic.goto_next()<CR>', options)
 map('n', '<leader>e', '<cmd>lua vim.diagnostic.show_line_diagnostics({ focusable = false })<CR>', options)
 
+
+-- LazyGit
+map('n', '<leader>gg', ':LazyGit<CR>', options)

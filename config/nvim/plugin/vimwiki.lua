@@ -11,5 +11,5 @@ vim.g['vimwiki_list'] = {
 -- vim instant markdon
 vim.g['instant_markdown_autostart'] = 0 -- no autostart
 vim.g['instant_markdown_browser'] = 'qutebrowser'
-map('n', '<leader>md',  ':InstantMarkdownPreview<cr>')
+map('n', '<leader>md',  ':MarkdownPreview<cr>')
 

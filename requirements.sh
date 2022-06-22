@@ -23,8 +23,11 @@ sudo npm i -g lua-fmt
 # svelte
 sudo pnpm i -g -y prettier-plugin-svelte
 # lua
-sudo pnpm i--g prettier @prettier/plugin-lua
+sudo pnpm i -g prettier @prettier/plugin-lua
 sudo pnpm i -g prettier-plugin-tailwindcss
+
+# tailwindcss
+sudo pnpm i -g @tailwindcss/language-server
 
 # live grep for telescope 
 brew install rg

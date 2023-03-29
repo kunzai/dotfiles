@@ -36,7 +36,7 @@ local nvim_lsp = require('lspconfig')
 -- -- Use a loop to conveniently call 'setup' on multiple servers and
 -- -- map buffer local keybindings when the language server attaches
 -- -- removed dartls as handled by nvim-flutter-tools
-local servers = { "sumneko_lua", "pyright", "tsserver", "cssls", "html", "svelte", "tailwindcss", "prosemd_lsp" }
+local servers = { "lua_ls", "pyright", "tsserver", "cssls", "html", "svelte", "tailwindcss", "prosemd_lsp" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,

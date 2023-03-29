@@ -1,3 +1,8 @@
+function Codeium() return vim.fn['codeium#GetStatusString']() end
+function Codeium_lualine()
+    return "codeium " .. Codeium()
+end
+
 require'lualine'.setup {
   options = {
     icons_enabled = true,
@@ -7,9 +12,9 @@ require'lualine'.setup {
     disabled_filetypes = {}
   },
   sections = {
-    lualine_a = { { 'mode', upper = true } },
+    lualine_a = { { 'mode', upper = true }, { codeium_status} },
     lualine_b = { { 'branch', icon = '' } },
-    lualine_c = { { 'diff', icon = ''}, {'filename'} },
+    lualine_c = { { 'diff', icon = ''}, {'filename'}, Codeium_lualine },
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}

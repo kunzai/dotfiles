@@ -1,0 +1,9 @@
+amethyst
+flutter
+font-fira-code
+font-fira-code-nerd-font
+font-hack-nerd-font
+hammerspoon
+kitty
+qutebrowser
+stats

@@ -126,7 +126,7 @@ alias 'n'='pnpm'
 alias 'v'='nvim'
 alias 'la'='ls -la'
 alias 'cddi'='cd ~/development/workspace_infographs'
-echo "if [ -f ~/.zsh_private_aliases ]; then source ~/.zsh_private_aliases; fi" >> ~/.zshrc
+if [ -f ~/.zsh_private_aliases ]; then source ~/.zsh_private_aliases; fi
 
 # define things
 export EDITOR="/opt/homebrew/bin/nvim"

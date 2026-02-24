@@ -125,7 +125,6 @@ source ~/.zsh_vim_mode
 alias 'n'='pnpm'
 alias 'v'='nvim'
 alias 'la'='ls -la'
-alias 'cddi'='cd ~/development/workspace_infographs'
 if [ -f ~/.zsh_private_aliases ]; then source ~/.zsh_private_aliases; fi
 
 # define things

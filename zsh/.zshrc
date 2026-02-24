@@ -153,3 +153,4 @@ if [ -f ~/.zsh_private_aliases ]; then source ~/.zsh_private_aliases; fi
 
 # Added by Antigravity
 export PATH="/Users/kunzai/.antigravity/antigravity/bin:$PATH"
+if [ -f ~/.zsh_private_aliases ]; then source ~/.zsh_private_aliases; fi

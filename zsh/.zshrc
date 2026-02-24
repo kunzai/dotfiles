@@ -149,3 +149,7 @@ esac
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+if [ -f ~/.zsh_private_aliases ]; then source ~/.zsh_private_aliases; fi
+
+# Added by Antigravity
+export PATH="/Users/kunzai/.antigravity/antigravity/bin:$PATH"

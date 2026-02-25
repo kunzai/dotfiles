@@ -4,6 +4,7 @@
 # https://github.com/FelixKratz/dotfiles
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
+source "$PLUGIN_DIR/colors.sh"
 
 ##### Bar Appearance #####
 # Configuring the general appearance of the bar.
@@ -12,7 +13,7 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 # If you are looking for other colors, see the color picker:
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
-sketchybar --bar position=top height=40 blur_radius=30 color=0x40000000
+sketchybar --bar position=top height=40 blur_radius=30 color=$BAR_COLOR
 
 ##### Changing Defaults #####
 # We now change some default values, which are applied to all further items.
@@ -33,28 +34,70 @@ default=(
 )
 sketchybar --default "${default[@]}"
 
-##### Adding Mission Control Space Indicators #####
-# Let's add some mission control spaces:
-# https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
-# to indicate active and available mission control spaces.
 
-SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
-for i in "${!SPACE_ICONS[@]}"
-do
-  sid="$(($i+1))"
-  space=(
-    space="$sid"
-    icon="${SPACE_ICONS[i]}"
-    icon.padding_left=7
-    icon.padding_right=7
-    background.color=0x40ffffff
-    background.corner_radius=5
-    background.height=25
-    label.drawing=off
-    script="$PLUGIN_DIR/space.sh"
-    click_script="yabai -m space --focus $sid"
-  )
-  sketchybar --add space space."$sid" left --set space."$sid" "${space[@]}"
+sketchybar --add event aerospace_workspace_change
+
+# Clean up any existing space items from previous runs
+sketchybar --remove '/space\..*/'
+
+# Explicitly define the order we want: 1 2 3 4 5 6 7 8 9 0
+for sid in 1 2 3 4 5 6 7 8 9 0; do
+  sketchybar --add item space.$sid left \
+    --subscribe space.$sid aerospace_workspace_change front_app_switched \
+    --set space.$sid \
+    drawing=on \
+    background.color=$ITEM_BG_COLOR \
+    background.corner_radius=5 \
+    background.drawing=off \
+    background.border_color=0xAAFFFFFF \
+    background.border_width=0 \
+    background.height=30 \
+    icon="$sid" \
+    icon.padding_left=10 \
+    icon.shadow.drawing=off \
+    label.font="Hack Nerd Font:Bold:16.0" \
+    label.padding_right=20 \
+    label.padding_left=0 \
+    label.y_offset=-1 \
+    label.shadow.drawing=off \
+    click_script="aerospace workspace $sid" \
+    script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+done
+
+
+# Load Icons on startup for all workspaces
+CURRENT_WORKSPACE=$(aerospace list-workspaces --focused)
+for sid in 1 2 3 4 5 6 7 8 9 0; do
+  apps=$(aerospace list-windows --workspace "$sid" | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
+
+  icon_strip=" "
+  if [ "${apps}" != "" ]; then
+    while read -r app; do
+      icon_strip+=" $($CONFIG_DIR/plugins/icon_map_fn.sh "$app")"
+    done <<<"${apps}"
+  else
+    icon_strip=""
+  fi
+
+  is_focused="off"
+  if [ "$sid" = "$CURRENT_WORKSPACE" ]; then
+    is_focused="on"
+  fi
+
+  if [ "$is_focused" = "on" ]; then
+    sketchybar --set space.$sid drawing=on \
+                                 label="$icon_strip" \
+                                 background.drawing=on \
+                                 background.color=0xffffffff \
+                                 icon.color=0xff000000 \
+                                 label.color=0xff000000
+  else
+    sketchybar --set space.$sid drawing=on \
+                                 label="$icon_strip" \
+                                 background.drawing=off \
+                                 icon.color=0xffffffff \
+                                 label.color=0xffffffff
+  fi
 done
 
 ##### Adding Left Items #####

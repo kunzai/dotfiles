@@ -348,7 +348,7 @@ run = ['layout tiling', 'move-node-to-workspace 5']
 ### floaters
 
 [[on-window-detected]]
-if.app-name-regex-substring = 'Battlenet|TSM'
+if.app-name-regex-substring = 'Battlenet|TSM|WowUp'
 run = ['layout floating', 'move-node-to-workspace 9']
 
 [[on-window-detected]]

@@ -322,12 +322,9 @@ n = [
 # Application-specific configurations
 #
 
-# [[on-window-detected]]
-# run = 'layout floating'
-
 [[on-window-detected]]
 if.app-name-regex-substring = 'Ghostty'
-run = ['layout tiling', 'move-node-to-workspace 1']
+run = ['layout floating', 'move-node-to-workspace 1']
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Helium'

@@ -5,6 +5,12 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# source /usr/share/cachyos-zsh-config/cachyos-config.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
@@ -92,11 +98,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
@@ -125,10 +131,8 @@ source ~/.zsh_vim_mode
 alias 'n'='pnpm'
 alias 'v'='nvim'
 alias 'la'='ls -la'
+alias 'll'='lsd -la'
 if [ -f ~/.zsh_private_aliases ]; then source ~/.zsh_private_aliases; fi
-
-# define things
-export EDITOR="/opt/homebrew/bin/nvim"
 
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -154,3 +158,8 @@ if [ -f ~/.zsh_private_aliases ]; then source ~/.zsh_private_aliases; fi
 # Added by Antigravity
 export PATH="/Users/kunzai/.antigravity/antigravity/bin:$PATH"
 if [ -f ~/.zsh_private_aliases ]; then source ~/.zsh_private_aliases; fi
+
+if [ -z "$SSH_AUTH_SOCK" ]; then
+  eval "$(ssh-agent -s)"
+  ssh-add ~/.ssh/id_ed25519
+fi

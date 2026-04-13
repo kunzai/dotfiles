@@ -13,11 +13,17 @@ Z13_REFRESH="180"
 
 case "$PROFILE" in
 laptop)
+  hyprctl keyword monitor 'desc:Samsung Electric Company LS24D60xU HNAX700460,disable'
+  hyprctl keyword monitor "desc:LG Electronics 17MT70 509NZLL087136,disable"
   hyprctl keyword monitor "desc:GIGA-BYTE TECHNOLOGY CO. LTD. M32UC 24270B001826,disable"
   hyprctl keyword monitor "desc:Tianma Microelectronics Ltd. TL134ADXP03,2560x1600@${Z13_REFRESH},0x0,1.6"
   ;;
 lg-alone)
   hyprctl keyword monitor "desc:LG Electronics 17MT70 509NZLL087136,2560x1600@60,0x0,1.6"
+  hyprctl keyword monitor "desc:Tianma Microelectronics Ltd. TL134ADXP03,disable"
+  ;;
+lg-alone-high)
+  hyprctl keyword monitor "desc:LG Electronics 17MT70 509NZLL087136,2560x1600@60,0x0,1"
   hyprctl keyword monitor "desc:Tianma Microelectronics Ltd. TL134ADXP03,disable"
   ;;
 lg-left)
@@ -29,20 +35,16 @@ lg-right)
   hyprctl keyword monitor "desc:LG Electronics 17MT70 509NZLL087136,2560x1600@60,1600x0,1.6"
   ;;
 garage)
-  hyprctl --batch "
-    keyword monitor 'desc:GIGA-BYTE TECHNOLOGY CO. LTD. M32UC 24270B001826,3840x2160@60,0x0,1.6'
-    keyword monitor 'desc:Tianma Microelectronics Ltd. TL134ADXP03,2560x1600@${Z13_REFRESH},400x1350,1.6'
-    "
+  hyprctl keyword monitor "desc:GIGA-BYTE TECHNOLOGY CO. LTD. M32UC 24270B001826,3840x2160@60,0x0,1.6"
+  hyprctl keyword monitor "desc:Tianma Microelectronics Ltd. TL134ADXP03,2560x1600@${Z13_REFRESH},0x2160,1.6,transform,0"
   ;;
 garage4k)
   hyprctl keyword monitor "desc:GIGA-BYTE TECHNOLOGY CO. LTD. M32UC 24270B001826,3840x2160@60,0x0,1"
   hyprctl keyword monitor "desc:Tianma Microelectronics Ltd. TL134ADXP03,2560x1600@${Z13_REFRESH},0x2160,1.6,transform,0"
   ;;
 work)
-  hyprctl --batch "
-    keyword monitor 'desc:Samsung Electric Company LS24D60xU HNAX700460,preferred,0x0,1'
-    keyword monitor 'desc:Tianma Microelectronics Ltd. TL134ADXP03,2560x1600@${Z13_REFRESH},480x1440,1.6'
-    "
+  hyprctl keyword monitor "desc:Samsung Electric Company LS24D60xU HNAX700460,2560x1440@99.95,0x0,1"
+  hyperctl keyword monitor "desc:Tianma Microelectronics Ltd. TL134ADXP03,2560x1600@${Z13_REFRESH},480x1440,1.6"
   ;;
 *)
   notify-send "Unknown: $PROFILE"

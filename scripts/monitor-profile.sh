@@ -37,14 +37,20 @@ lg-right)
 garage)
   hyprctl keyword monitor "desc:GIGA-BYTE TECHNOLOGY CO. LTD. M32UC 24270B001826,3840x2160@60,0x0,1.6"
   hyprctl keyword monitor "desc:Tianma Microelectronics Ltd. TL134ADXP03,2560x1600@${Z13_REFRESH},0x2160,1.6,transform,0"
+  hyprctl keyword workspace = 1, monitor:desc:Tianma Microelectronics Ltd. TL134ADXP03
+  hyprctl keyword workspace = w[2-9], monitor:desc:GIGA-BYTE TECHNOLOGY CO. LTD. M32UC 24270B001826
   ;;
 garage4k)
   hyprctl keyword monitor "desc:GIGA-BYTE TECHNOLOGY CO. LTD. M32UC 24270B001826,3840x2160@60,0x0,1"
   hyprctl keyword monitor "desc:Tianma Microelectronics Ltd. TL134ADXP03,2560x1600@${Z13_REFRESH},0x2160,1.6,transform,0"
+  hyprctl keyword workspace = 1, monitor:desc:Tianma Microelectronics Ltd. TL134ADXP03
+  hyprctl keyword workspace = w[2-9], monitor:desc:GIGA-BYTE TECHNOLOGY CO. LTD. M32UC 24270B001826
   ;;
 work)
   hyprctl keyword monitor "desc:Samsung Electric Company LS24D60xU HNAX700460,2560x1440@99.95,0x0,1"
-  hyperctl keyword monitor "desc:Tianma Microelectronics Ltd. TL134ADXP03,2560x1600@${Z13_REFRESH},480x1440,1.6"
+  hyprctl keyword monitor "desc:Tianma Microelectronics Ltd. TL134ADXP03,2560x1600@${Z13_REFRESH},480x1440,1.6"
+  hyprctl keyword workspace = 1, monitor:desc:Tianma Microelectronics Ltd. TL134ADXP03, persisten:true
+  hyprctl keyword workspace = w[2-9], monitor:desc:Samsung Electric Company LS24D60xU HNAX700460, persistent:true, default:true, rounding:false
   ;;
 *)
   notify-send "Unknown: $PROFILE"

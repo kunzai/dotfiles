@@ -14,6 +14,11 @@ local terminal = "ghostty"
 local fileManager = "dolphin"
 local menu = "hyprlauncher"
 
-loadfile(os.getenv("HOME") .. "/.config/hypr/input.lua")()
-loadfile(os.getenv("HOME") .. "/.config/hypr/keybindings.lua")()
-loadfile(os.getenv("HOME") .. "/.config/hypr/env.lua")()
+-- less battery drainage
+hl.config({ decoration = { blur = { enabled = false } } })
+hl.config({ decoration = { shadow = { enabled = false } } })
+
+require("input")
+require("keybindings")
+require("env")
+require("execute")

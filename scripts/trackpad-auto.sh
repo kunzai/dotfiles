@@ -5,11 +5,11 @@ TIMEOUT=1.5
 TIMER_PID=""
 
 enable_tp() {
-  hyprctl keyword "device[$DEVICE]:enabled" true >/dev/null 2>&1
+  hyprctl eval "hl.device({ name = \"$DEVICE\", enabled = true })" >/dev/null 2>&1
 }
 
 disable_tp() {
-  hyprctl keyword "device[$DEVICE]:enabled" false >/dev/null 2>&1
+  hyprctl eval "hl.device({ name = \"$DEVICE\", enabled = false })" >/dev/null 2>&1
 }
 
 reset_timer() {

@@ -1,183 +1,237 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PROFILE="${1:-laptop}"
-
-FLOW_DESC='desc:Tianma Microelectronics Ltd. TL134ADXP03'
-LG_DESC='desc:LG Electronics 17MT70 509NZLL087136'
-GARAGE_DESC='desc:GIGA-BYTE TECHNOLOGY CO. LTD. M32UC 24270B001826'
-WORK_DESC='desc:Samsung Electric Company LS24D60xU HNAX700460'
-
+PROFILE="${1:-}"
 WS_DIR="${HOME}/.config/ws-monitors"
 CURRENT_WS_FILE="${WS_DIR}/workspaces-current.conf"
 
-BATTERY_MODE=false
-if hyprctl devices 2>/dev/null | grep -qi battery; then
-  BATTERY_MODE=true
-fi
+FLOW_DESC="desc:Tianma Microelectronics Ltd. TL134ADXP03"
+LG_DESC="desc:LG Electronics 17MT70 509NZLL087136"
+WORK_DESC="desc:Samsung Electric Company LS24D60xU HNAX700460"
+GARAGE_DESC="desc:GIGA-BYTE TECHNOLOGY CO. LTD. M32U"
+GARAGE4K_DESC="desc:GIGA-BYTE TECHNOLOGY CO. LTD. M32U"
+Z13_REFRESH="${Z13_REFRESH:-180}"
 
-Z13_REFRESH="180"
-[[ "$BATTERY_MODE" == true ]] && Z13_REFRESH="60"
+usage() {
+  cat <<'EOF'
+Usage:
+  monitor-profile.sh PROFILE
+
+Profiles:
+  laptop
+  lg-left
+  lg-right
+  work
+  garage
+  garage4k
+EOF
+  exit 1
+}
+
+require_profile() {
+  [[ -n "${PROFILE}" ]] || usage
+}
+
+require_tools() {
+  command -v hyprctl >/dev/null 2>&1 || {
+    echo "hyprctl not found" >&2
+    exit 1
+  }
+  mkdir -p "${WS_DIR}"
+}
 
 set_workspaces_file() {
   local src="$1"
-  cp "$src" "$CURRENT_WS_FILE"
+  [[ -f "${src}" ]] || {
+    echo "Workspace file not found: ${src}" >&2
+    exit 1
+  }
+  cp "${src}" "${CURRENT_WS_FILE}"
+}
+
+lua_quote() {
+  local s="${1//\\/\\\\}"
+  s="${s//\"/\\\"}"
+  printf '%s' "$s"
+}
+
+hypr_dispatch() {
+  local code="$1"
+  hyprctl dispatch "$code" >/dev/null
+}
+
+hypr_eval() {
+  local code="$1"
+  hyprctl eval "$code" >/dev/null
+}
+
+monitor_enable() {
+  local output="$1"
+  local mode="$2"
+  local position="$3"
+  local scale="$4"
+
+  hypr_eval "hl.monitor({ output = \"$(lua_quote "$output")\", mode = \"$(lua_quote "$mode")\", position = \"$(lua_quote "$position")\", scale = ${scale} })"
+}
+
+monitor_disable() {
+  local output="$1"
+  hypr_eval "hl.monitor({ output = \"$(lua_quote "$output")\", disabled = true })"
+}
+
+workspace_go() {
+  local ws="$1"
+  hypr_dispatch "hl.dsp.workspace(\"$(lua_quote "$ws")\")"
+}
+
+move_ws_to_monitor() {
+  local ws="$1"
+  local mon="$2"
+  hypr_dispatch "hl.dsp.moveworkspacetomonitor(\"$(lua_quote "$ws")\", \"$(lua_quote "$mon")\")" || true
+}
+
+focus_monitor() {
+  local mon="$1"
+  hypr_dispatch "hl.dsp.focusmonitor(\"$(lua_quote "$mon")\")" || true
 }
 
 move_existing_workspaces() {
-  local external_desc="${1:-}"
-
-  hyprctl eval "hl.dsp.moveworkspacetomonitor('1', '$FLOW_DESC')" >/dev/null 2>&1 || true
-
-  if [[ -n "$external_desc" ]]; then
-    for ws in 2 3 4 5 6 7 8 9; do
-      hyprctl eval "hl.dsp.moveworkspacetomonitor('$ws', '$external_desc')" >/dev/null 2>&1 || true
-    done
-  else
-    for ws in 2 3 4 5 6 7 8 9; do
-      hyprctl eval "hl.dsp.moveworkspacetomonitor('$ws', '$FLOW_DESC')" >/dev/null 2>&1 || true
-    done
-  fi
+  local target="$1"
+  for ws in 1 2 3 4 5 6 7 8 9; do
+    move_ws_to_monitor "$ws" "$target"
+  done
 }
 
-case "$PROFILE" in
-laptop)
+reload_config() {
+  hyprctl reload >/dev/null
+  sleep 0.2
+}
+
+apply_laptop() {
   set_workspaces_file "${WS_DIR}/workspaces-laptop.conf"
-  hyprctl reload
+  reload_config
+
+  move_existing_workspaces "$FLOW_DESC"
   sleep 0.2
 
-  hyprctl eval "hl.dsp.moveworkspacetomonitor('1', '$FLOW_DESC')" >/dev/null 2>&1 || true
-  for ws in 2 3 4 5 6 7 8 9; do
-    hyprctl eval "hl.dsp.moveworkspacetomonitor('$ws', '$FLOW_DESC')" >/dev/null 2>&1 || true
-  done
+  monitor_disable "$WORK_DESC"
+  monitor_disable "$LG_DESC"
+  monitor_disable "$GARAGE_DESC"
+  monitor_disable "$GARAGE4K_DESC"
 
-  sleep 0.2
-  hyprctl eval "hl.config.monitor = { '$WORK_DESC,disable' }"
-  hyprctl eval "hl.config.monitor = { '$LG_DESC,disable' }"
-  hyprctl eval "hl.config.monitor = { '$GARAGE_DESC,disable' }"
+  monitor_enable "$FLOW_DESC" "2560x1600@${Z13_REFRESH}" "0x0" "1.6"
 
-  hyprctl eval "hl.config.monitor = { '$FLOW_DESC,2560x1600@${Z13_REFRESH},0x0,1.6' }"
-  hyprctl eval "hl.dsp.workspace('1')"
-  ;;
+  workspace_go "1"
+}
 
-lg-above)
+apply_lg_left() {
   set_workspaces_file "${WS_DIR}/workspaces-lg.conf"
-  hyprctl reload
-  sleep 0.2
+  reload_config
 
-  hyprctl eval "hl.config.monitor = { '$WORK_DESC,disable' }"
-  hyprctl eval "hl.config.monitor = { '$GARAGE_DESC,disable' }"
-  hyprctl eval "hl.config.monitor = { '$LG_DESC,2560x1600@60,0x0,1.6' }"
-  hyprctl eval "hl.config.monitor = { '$FLOW_DESC,2560x1600@${Z13_REFRESH},0x1000,1.6' }"
-  hyprctl eval "hl.dsp.focusmonitor('1')" # lg fokussieren
+  monitor_disable "$WORK_DESC"
+  monitor_disable "$GARAGE_DESC"
+  monitor_disable "$GARAGE4K_DESC"
+
+  monitor_enable "$LG_DESC" "2560x1600@59.97" "0x0" "1.6"
+  monitor_enable "$FLOW_DESC" "2560x1600@${Z13_REFRESH}" "1600x0" "1.6"
 
   move_existing_workspaces "$LG_DESC"
-  hyprctl eval "hl.dsp.workspace('1')"
-  ;;
+  move_ws_to_monitor "1" "$FLOW_DESC"
+  workspace_go "1"
+}
 
-lg-alone)
-  set_workspaces_file "${WS_DIR}/workspaces-lg-alone.conf"
-  hyprctl reload
-  sleep 0.2
-
-  hyprctl eval "hl.dsp.moveworkspacetomonitor('1', '$LG_DESC')" >/dev/null 2>&1 || true
-  for ws in 2 3 4 5 6 7 8 9; do
-    hyprctl eval "hl.dsp.moveworkspacetomonitor('$ws', '$LG_DESC')" >/dev/null 2>&1 || true
-  done
-
-  sleep 0.2
-  hyprctl eval "hl.config.monitor = { '$WORK_DESC,disable' }"
-  hyprctl eval "hl.config.monitor = { '$FLOW_DESC,disable' }"
-  hyprctl eval "hl.config.monitor = { '$GARAGE_DESC,disable' }"
-
-  hyprctl eval "hl.config.monitor = { '$LG_DESC,2560x1600@60,0x0,1.6' }"
-  hyprctl eval "hl.dsp.workspace('1')"
-  ;;
-
-lg-alone-high)
-  hyprctl eval "hl.config.monitor = { '$WORK_DESC,disable' }"
-  hyprctl eval "hl.config.monitor = { '$GARAGE_DESC,disable' }"
-  hyprctl eval "hl.config.monitor = { '$LG_DESC,2560x1600@60,0x0,1' }"
-  hyprctl eval "hl.config.monitor = { '$FLOW_DESC,disable' }"
-
+apply_lg_right() {
   set_workspaces_file "${WS_DIR}/workspaces-lg.conf"
-  hyprctl reload
-  for ws in 1 2 3 4 5 6 7 8 9; do
-    hyprctl eval "hl.dsp.moveworkspacetomonitor('$ws', '$LG_DESC')" >/dev/null 2>&1 || true
-  done
-  hyprctl eval "hl.dsp.workspace('1')"
-  ;;
+  reload_config
 
-lg-left)
-  hyprctl eval "hl.config.monitor = { '$WORK_DESC,disable' }"
-  hyprctl eval "hl.config.monitor = { '$GARAGE_DESC,disable' }"
-  hyprctl eval "hl.config.monitor = { '$LG_DESC,2560x1600@60,0x0,1.6' }"
-  hyprctl eval "hl.config.monitor = { '$FLOW_DESC,2560x1600@${Z13_REFRESH},1600x0,1.6' }"
+  monitor_disable "$WORK_DESC"
+  monitor_disable "$GARAGE_DESC"
+  monitor_disable "$GARAGE4K_DESC"
 
-  set_workspaces_file "${WS_DIR}/workspaces-lg.conf"
-  hyprctl reload
+  monitor_enable "$FLOW_DESC" "2560x1600@${Z13_REFRESH}" "0x0" "1.6"
+  monitor_enable "$LG_DESC" "2560x1600@59.97" "1600x0" "1.6"
+
   move_existing_workspaces "$LG_DESC"
-  hyprctl eval "hl.dsp.workspace('1')"
-  ;;
+  move_ws_to_monitor "1" "$FLOW_DESC"
+  workspace_go "1"
+}
 
-lg-right)
-  hyprctl eval "hl.config.monitor = { '$WORK_DESC,disable' }"
-  hyprctl eval "hl.config.monitor = { '$GARAGE_DESC,disable' }"
-  hyprctl eval "hl.config.monitor = { '$FLOW_DESC,2560x1600@${Z13_REFRESH},0x0,1.6' }"
-  hyprctl eval "hl.config.monitor = { '$LG_DESC,2560x1600@60,1600x0,1.6' }"
-
-  set_workspaces_file "${WS_DIR}/workspaces-lg.conf"
-  hyprctl reload
-  move_existing_workspaces "$LG_DESC"
-  hyprctl eval "hl.dsp.workspace('1')"
-  ;;
-
-garage)
-  set_workspaces_file "${WS_DIR}/workspaces-garage.conf"
-  hyprctl reload
-  sleep 0.2
-
-  hyprctl eval "hl.config.monitor = { '$WORK_DESC,disable' }"
-  hyprctl eval "hl.config.monitor = { '$LG_DESC,disable' }"
-  hyprctl eval "hl.config.monitor = { '$GARAGE_DESC,3840x2160@60,0x0,1.6' }"
-  hyprctl eval "hl.config.monitor = { '$FLOW_DESC,2560x1600@${Z13_REFRESH},400x1350,1.6' }"
-
-  move_existing_workspaces "$GARAGE_DESC"
-  hyprctl eval "hl.dsp.workspace('1')"
-  ;;
-
-garage4k)
-  hyprctl eval "hl.config.monitor = { '$WORK_DESC,disable' }"
-  hyprctl eval "hl.config.monitor = { '$LG_DESC,disable' }"
-  hyprctl eval "hl.config.monitor = { '$GARAGE_DESC,3840x2160@60,0x0,1' }"
-  hyprctl eval "hl.config.monitor = { '$FLOW_DESC,2560x1600@${Z13_REFRESH},640x2160,1.6' }"
-
-  set_workspaces_file "${WS_DIR}/workspaces-garage.conf"
-  hyprctl reload
-  move_existing_workspaces "$GARAGE_DESC"
-  hyprctl eval "hl.dsp.workspace('1')"
-  ;;
-
-work)
+apply_work() {
   set_workspaces_file "${WS_DIR}/workspaces-work.conf"
-  hyprctl reload
-  sleep 0.2
+  reload_config
 
-  hyprctl eval "hl.config.monitor = { '$LG_DESC,disable' }"
-  hyprctl eval "hl.config.monitor = { '$GARAGE_DESC,disable' }"
-  hyprctl eval "hl.config.monitor = { '$WORK_DESC,2560x1440@99.95,0x0,1.6' }"
-  hyprctl eval "hl.config.monitor = { '$FLOW_DESC,2560x1600@${Z13_REFRESH},0x900,1.6' }"
-  hyprctl eval "hl.dsp.focusmonitor('1')" # Samsung fokussieren
+  monitor_disable "$LG_DESC"
+  monitor_disable "$GARAGE_DESC"
+  monitor_disable "$GARAGE4K_DESC"
+
+  monitor_enable "$FLOW_DESC" "2560x1600@${Z13_REFRESH}" "0x0" "1.6"
+  monitor_enable "$WORK_DESC" "2560x1440@99.95" "0x-1440" "1"
 
   move_existing_workspaces "$WORK_DESC"
-  hyprctl eval "hl.dsp.workspace('1')"
-  ;;
+  move_ws_to_monitor "1" "$FLOW_DESC"
+  focus_monitor "$WORK_DESC"
+  workspace_go "1"
+}
 
-*)
-  notify-send "Unknown profile: $PROFILE"
-  exit 1
-  ;;
-esac
+apply_garage() {
+  set_workspaces_file "${WS_DIR}/workspaces-garage.conf"
+  reload_config
 
-notify-send "✓ $PROFILE (Z13: ${Z13_REFRESH}Hz @1.6)"
- @1.6)"
+  monitor_disable "$WORK_DESC"
+  monitor_disable "$LG_DESC"
+
+  monitor_enable "$FLOW_DESC" "2560x1600@${Z13_REFRESH}" "0x0" "1.6"
+  monitor_enable "$GARAGE_DESC" "3840x2160@60" "0x-1350" "1.6"
+
+  move_existing_workspaces "$GARAGE_DESC"
+  move_ws_to_monitor "1" "$FLOW_DESC"
+  focus_monitor "$GARAGE_DESC"
+  workspace_go "1"
+}
+
+apply_garage4k() {
+  set_workspaces_file "${WS_DIR}/workspaces-garage.conf"
+  reload_config
+
+  monitor_disable "$WORK_DESC"
+  monitor_disable "$LG_DESC"
+
+  monitor_enable "$FLOW_DESC" "2560x1600@${Z13_REFRESH}" "0x0" "1.6"
+  monitor_enable "$GARAGE4K_DESC" "3840x2160@60" "0x-2160" "1"
+
+  move_existing_workspaces "$GARAGE4K_DESC"
+  move_ws_to_monitor "1" "$FLOW_DESC"
+  focus_monitor "$GARAGE4K_DESC"
+  workspace_go "1"
+}
+
+main() {
+  require_profile
+  require_tools
+
+  case "$PROFILE" in
+  laptop)
+    apply_laptop
+    ;;
+  lg-left)
+    apply_lg_left
+    ;;
+  lg-right)
+    apply_lg_right
+    ;;
+  work)
+    apply_work
+    ;;
+  garage)
+    apply_garage
+    ;;
+  garage4k)
+    apply_garage4k
+    ;;
+  *)
+    usage
+    ;;
+  esac
+}
+
+main "$@"

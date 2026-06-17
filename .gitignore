@@ -2,3 +2,4 @@ nvim/.DS_Store
 zsh/.zsh_private_aliases
 /.DS_Store
 /scripts/docker4.logs
+/ws-monitors/.config/ws-monitors/workspaces-current.conf

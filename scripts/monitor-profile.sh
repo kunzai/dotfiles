@@ -107,6 +107,26 @@ reload_config() {
   sleep 0.2
 }
 
+on_battery() {
+  for status_file in /sys/class/power_supply/BAT*/power_status /sys/class/power_supply/BAT*/status; do
+    if [[ -f "$status_file" ]]; then
+      val=$(cat "$status_file" 2>/dev/null || true)
+      if [[ "$val" == "Discharging" || "$val" == "discharging" ]]; then
+        return 0
+      fi
+    fi
+  done
+  return 1
+}
+
+get_laptop_refresh() {
+  if on_battery; then
+    echo "60.00"
+  else
+    echo "180.00"
+  fi
+}
+
 apply_laptop() {
   set_workspaces_file "${WS_DIR}/workspaces-laptop.conf"
   reload_config
@@ -119,7 +139,10 @@ apply_laptop() {
   monitor_disable "$GARAGE_DESC"
   monitor_disable "$GARAGE4K_DESC"
 
-  monitor_enable "$FLOW_DESC" "2560x1600@${Z13_REFRESH}" "0x0" "1.6"
+  local refresh
+  refresh=$(get_laptop_refresh)
+
+  monitor_enable "$FLOW_DESC" "2560x1600@${refresh}Hz" "0x0" 1.6
 
   workspace_go "1"
 }

@@ -1,3 +1,8 @@
+local home = os.getenv("HOME")
+local monitorMenu = home .. "/.local/bin/monitor-menu.sh"
+
+hl.bind("SUPER + SHIFT + M", hl.dsp.exec_cmd(monitorMenu))
+
 hl.bind("SUPER + T", hl.dsp.exec_cmd("ghostty"))
 hl.bind("SUPER + W", hl.dsp.exec_cmd("zen-browser"))
 

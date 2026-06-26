@@ -358,6 +358,12 @@ main() {
   laptop)
     apply_laptop
     ;;
+  lg-above)
+    apply_lg_above
+    ;;
+  lg-alone)
+    apply_lg_alone
+    ;;
   lg-left)
     apply_lg_left
     ;;

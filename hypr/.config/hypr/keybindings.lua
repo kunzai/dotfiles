@@ -5,6 +5,7 @@ hl.bind("SUPER + SHIFT + M", hl.dsp.exec_cmd(monitorMenu))
 
 hl.bind("SUPER + T", hl.dsp.exec_cmd("ghostty"))
 hl.bind("SUPER + W", hl.dsp.exec_cmd("zen-browser"))
+hl.bind("SUPER + E", hl.dsp.exec_cmd("dolphin"))
 
 -- fullscreen
 hl.bind("SUPER + f", function()

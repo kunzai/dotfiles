@@ -23,6 +23,7 @@ require("keybindings")
 require("env")
 require("execute")
 
+-- monitor management
 local home = os.getenv("HOME")
 
 local ws_rules = home .. "/.config/hypr/workspace-rules-active.lua"

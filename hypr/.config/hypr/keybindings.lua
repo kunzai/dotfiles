@@ -11,3 +11,9 @@ hl.bind("SUPER + f", function()
 	-- some logic...
 	hl.dispatch(hl.dsp.window.fullscreen({ action = "toggle" }))
 end)
+
+-- toggle floating
+hl.bind("SUPER + ALT + SPACE", function()
+	hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
+	hl.dispatch(hl.dsp.window.center())
+end)

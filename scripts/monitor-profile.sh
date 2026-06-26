@@ -19,6 +19,8 @@ Usage:
 
 Profiles:
   laptop
+  lg-above
+  lg-alone
   lg-left
   lg-right
   work

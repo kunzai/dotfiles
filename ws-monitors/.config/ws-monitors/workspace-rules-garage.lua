@@ -25,6 +25,7 @@ hl.workspace_rule({
 	workspace = "5",
 	monitor = "desc:GIGA-BYTE TECHNOLOGY CO. LTD. M32UC 24270B001826",
 	persistent = true,
+	layout = "scrolling",
 })
 hl.workspace_rule({
 	workspace = "6",
@@ -43,6 +44,11 @@ hl.workspace_rule({
 })
 hl.workspace_rule({
 	workspace = "9",
+	monitor = "desc:GIGA-BYTE TECHNOLOGY CO. LTD. M32UC 24270B001826",
+	persistent = true,
+})
+hl.workspace_rule({
+	workspace = "0",
 	monitor = "desc:GIGA-BYTE TECHNOLOGY CO. LTD. M32UC 24270B001826",
 	persistent = true,
 })

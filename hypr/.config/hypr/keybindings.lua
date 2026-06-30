@@ -18,3 +18,6 @@ hl.bind("SUPER + ALT + SPACE", function()
 	hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
 	hl.dispatch(hl.dsp.window.center())
 end)
+
+-- lock the screen
+hl.bind("SUPER + SHIFT + L", hl.dsp.exec_cmd("hyprlock"))

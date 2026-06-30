@@ -284,26 +284,43 @@ apply_lg_right() {
 }
 
 apply_work() {
+
   set_workspaces_file "${WS_DIR}/workspaces-work.conf"
   swap_workspace_rules "work"
-  swap_monitor_profile "garage"
+  swap_monitor_profile "work"
   reload_config
 
-  monitor_disable "$LG_DESC"
   monitor_disable "$GARAGE_DESC"
-  monitor_disable "$GARAGE4K_DESC"
+  monitor_disable "$LG_DESC"
 
-  monitor_enable "$FLOW_DESC" "2560x1600@180.00" "0x0" 1.6
-  monitor_enable "$WORK_DESC" "2560x1440@99.95" "0x-1440" 1
-
-  # ws1 to FLOW, ws2-9 to WORK
   move_ws_to_monitor "1" "$FLOW_DESC"
   for ws in 2 3 4 5 6 7 8 9; do
     move_ws_to_monitor "$ws" "$WORK_DESC"
   done
 
   focus_monitor "$WORK_DESC"
-  workspace_go "1"
+  workspace_go "2"
+
+  #  set_workspaces_file "${WS_DIR}/workspaces-work.conf"
+  #  swap_workspace_rules "work"
+  #  swap_monitor_profile "garage"
+  #  reload_config
+  #
+  #  monitor_disable "$LG_DESC"
+  #  monitor_disable "$GARAGE_DESC"
+  #  monitor_disable "$GARAGE4K_DESC"
+  #
+  #  monitor_enable "$FLOW_DESC" "2560x1600@180.00" "0x0" 1.6
+  #  monitor_enable "$WORK_DESC" "2560x1440@99.95" "0x-1440" 1
+  #
+  #  # ws1 to FLOW, ws2-9 to WORK
+  #  move_ws_to_monitor "1" "$FLOW_DESC"
+  #  for ws in 2 3 4 5 6 7 8 9; do
+  #    move_ws_to_monitor "$ws" "$WORK_DESC"
+  #  done
+  #
+  #  focus_monitor "$WORK_DESC"
+  #  workspace_go "1"
 }
 
 apply_garage() {

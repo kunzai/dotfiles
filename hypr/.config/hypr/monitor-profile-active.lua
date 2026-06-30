@@ -1,19 +1,19 @@
 hl.monitor({
-	output = "desc:LG Electronics 17MT70 509NZLL087136",
-	mode = "2560x1600@59.97Hz",
+	output = "desc:Tianma Microelectronics Ltd. TL134ADXP03",
+	mode = "2560x1600@180.00Hz",
 	position = "0x0",
 	scale = 1.6,
 })
 
 hl.monitor({
-	output = "desc:Tianma Microelectronics Ltd. TL134ADXP03",
-	mode = "2560x1600@180.00Hz",
-	position = "0x1000",
-	scale = 1.6,
+	output = "desc:Samsung Electric Company LS24D60xU HNAX700460",
+	mode = "2560x1440@99.95Hz",
+	position = "0x-1440",
+	scale = 1,
 })
 
 hl.monitor({
-	output = "desc:Samsung Electric Company LS24D60xU HNAX700460",
+	output = "desc:LG Electronics 17MT70 509NZLL087136",
 	disabled = true,
 })
 

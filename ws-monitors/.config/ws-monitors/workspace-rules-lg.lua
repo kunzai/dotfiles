@@ -13,7 +13,12 @@ hl.workspace_rule({
 })
 hl.workspace_rule({ workspace = "3", monitor = "desc:LG Electronics 17MT70 509NZLL087136", persistent = true })
 hl.workspace_rule({ workspace = "4", monitor = "desc:LG Electronics 17MT70 509NZLL087136", persistent = true })
-hl.workspace_rule({ workspace = "5", monitor = "desc:LG Electronics 17MT70 509NZLL087136", persistent = true })
+hl.workspace_rule({
+	workspace = "5",
+	monitor = "desc:LG Electronics 17MT70 509NZLL087136",
+	persistent = true,
+	layout = "scrolling",
+})
 hl.workspace_rule({ workspace = "6", monitor = "desc:LG Electronics 17MT70 509NZLL087136", persistent = true })
 hl.workspace_rule({ workspace = "7", monitor = "desc:LG Electronics 17MT70 509NZLL087136", persistent = true })
 hl.workspace_rule({ workspace = "8", monitor = "desc:LG Electronics 17MT70 509NZLL087136", persistent = true })

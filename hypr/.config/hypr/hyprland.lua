@@ -22,6 +22,7 @@ require("input")
 require("keybindings")
 require("env")
 require("execute")
+require("monitors")
 
 -- monitor management
 local home = os.getenv("HOME")

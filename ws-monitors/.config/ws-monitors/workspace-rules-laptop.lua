@@ -17,4 +17,4 @@ hl.workspace_rule({ workspace = "6", monitor = "desc:Tianma Microelectronics Ltd
 hl.workspace_rule({ workspace = "7", monitor = "desc:Tianma Microelectronics Ltd. TL134ADXP03", persistent = true })
 hl.workspace_rule({ workspace = "8", monitor = "desc:Tianma Microelectronics Ltd. TL134ADXP03", persistent = true })
 hl.workspace_rule({ workspace = "9", monitor = "desc:Tianma Microelectronics Ltd. TL134ADXP03", persistent = true })
-hl.workspace_rule({ workspace = "0", monitor = "desc:Tianma Microelectronics Ltd. TL134ADXP03", persistent = true })
+hl.workspace_rule({ workspace = "10", monitor = "desc:Tianma Microelectronics Ltd. TL134ADXP03", persistent = true })

@@ -23,3 +23,4 @@ hl.workspace_rule({ workspace = "6", monitor = "desc:LG Electronics 17MT70 509NZ
 hl.workspace_rule({ workspace = "7", monitor = "desc:LG Electronics 17MT70 509NZLL087136", persistent = true })
 hl.workspace_rule({ workspace = "8", monitor = "desc:LG Electronics 17MT70 509NZLL087136", persistent = true })
 hl.workspace_rule({ workspace = "9", monitor = "desc:LG Electronics 17MT70 509NZLL087136", persistent = true })
+hl.workspace_rule({ workspace = "10", monitor = "desc:LG Electronics 17MT70 509NZLL087136", persistent = true })

@@ -23,3 +23,8 @@ hl.workspace_rule({ workspace = "6", monitor = "desc:Samsung Electric Company LS
 hl.workspace_rule({ workspace = "7", monitor = "desc:Samsung Electric Company LS24D60xU HNAX700460", persistent = true })
 hl.workspace_rule({ workspace = "8", monitor = "desc:Samsung Electric Company LS24D60xU HNAX700460", persistent = true })
 hl.workspace_rule({ workspace = "9", monitor = "desc:Samsung Electric Company LS24D60xU HNAX700460", persistent = true })
+hl.workspace_rule({
+	workspace = "10",
+	monitor = "desc:Samsung Electric Company LS24D60xU HNAX700460",
+	persistent = true,
+})

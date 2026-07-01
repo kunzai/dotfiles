@@ -14,9 +14,10 @@ hl.window_rule({
 	workspace = "9 silent",
 })
 
+-- TradeskillMaster
 hl.window_rule({
 	name = "tsm-trading-on-ws0-floating",
 	match = { class = "^(steam_app_4023158823)$" },
-	workspace = "0 silent",
+	workspace = "10 silent",
 	float = true,
 })

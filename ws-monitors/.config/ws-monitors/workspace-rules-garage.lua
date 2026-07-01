@@ -48,7 +48,7 @@ hl.workspace_rule({
 	persistent = true,
 })
 hl.workspace_rule({
-	workspace = "0",
+	workspace = "10",
 	monitor = "desc:GIGA-BYTE TECHNOLOGY CO. LTD. M32UC 24270B001826",
 	persistent = true,
 })
